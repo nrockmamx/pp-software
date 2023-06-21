@@ -1,4 +1,5 @@
 using Domain.Model;
+using Domain.Model.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ILogger = Serilog.ILogger;
@@ -23,8 +24,8 @@ namespace Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet("accesstoken/get")]
-        public async Task<ActionResult<ModelResponse>> SumPromotion(DateTime dt, CancellationToken cancellationToken = default)
+        [HttpPost("accesstoken/get")]
+        public async Task<ActionResult<ModelResponse>> AccessTokenGet(AccessTokenGetRequest accessTokenGetRequest)
         {
             try
             {
