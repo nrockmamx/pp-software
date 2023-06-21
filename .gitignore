@@ -14,3 +14,15 @@ Launcher/obj/Debug/net6.0/
 Api/obj/
 
 Launcher/obj/
+
+Api/bin/Debug/net6.0/
+
+Domain/bin/Debug/net6.0/
+
+Domain/obj/Debug/net6.0/
+
+Domain/obj/
+
+Infrastruceture/bin/Debug/net6.0/
+
+Infrastruceture/obj/Debug/net6.0/

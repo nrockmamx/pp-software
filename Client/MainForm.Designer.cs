@@ -34,8 +34,8 @@
             checkInToolStripMenuItem = new ToolStripMenuItem();
             historyToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
-            panelContrainer = new Panel();
             memberCardToolStripMenuItem = new ToolStripMenuItem();
+            panelContrainer = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1751, 33);
+            menuStrip1.Size = new Size(1828, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -60,20 +60,20 @@
             // 
             toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { checkInToolStripMenuItem, historyToolStripMenuItem });
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(270, 34);
+            toolStripMenuItem3.Size = new Size(206, 34);
             toolStripMenuItem3.Text = "Border Pass";
             // 
             // checkInToolStripMenuItem
             // 
             checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            checkInToolStripMenuItem.Size = new Size(270, 34);
+            checkInToolStripMenuItem.Size = new Size(176, 34);
             checkInToolStripMenuItem.Text = "CheckIn";
             checkInToolStripMenuItem.Click += checkInToolStripMenuItem_Click;
             // 
             // historyToolStripMenuItem
             // 
             historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            historyToolStripMenuItem.Size = new Size(270, 34);
+            historyToolStripMenuItem.Size = new Size(176, 34);
             historyToolStripMenuItem.Text = "History";
             // 
             // toolStripMenuItem2
@@ -83,24 +83,24 @@
             toolStripMenuItem2.Size = new Size(95, 29);
             toolStripMenuItem2.Text = "Member";
             // 
+            // memberCardToolStripMenuItem
+            // 
+            memberCardToolStripMenuItem.Name = "memberCardToolStripMenuItem";
+            memberCardToolStripMenuItem.Size = new Size(223, 34);
+            memberCardToolStripMenuItem.Text = "Member Card";
+            // 
             // panelContrainer
             // 
             panelContrainer.Location = new Point(12, 36);
             panelContrainer.Name = "panelContrainer";
-            panelContrainer.Size = new Size(1727, 927);
+            panelContrainer.Size = new Size(1804, 1045);
             panelContrainer.TabIndex = 1;
-            // 
-            // memberCardToolStripMenuItem
-            // 
-            memberCardToolStripMenuItem.Name = "memberCardToolStripMenuItem";
-            memberCardToolStripMenuItem.Size = new Size(270, 34);
-            memberCardToolStripMenuItem.Text = "Member Card";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1751, 975);
+            ClientSize = new Size(1828, 1093);
             Controls.Add(panelContrainer);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;

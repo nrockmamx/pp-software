@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            label13 = new Label();
+            groupBox5 = new GroupBox();
+            dataGridView1 = new DataGridView();
             button1 = new Button();
             groupBox2 = new GroupBox();
             pictureBox1 = new PictureBox();
@@ -58,16 +61,15 @@
             textBox1 = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            groupBox5 = new GroupBox();
-            label13 = new Label();
-            dataGridView1 = new DataGridView();
+            border_pass_pictureBox = new PictureBox();
             groupBox1.SuspendLayout();
+            groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
-            groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -83,18 +85,49 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Border Pass CheckIn ";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(1223, 672);
+            label13.Name = "label13";
+            label13.Size = new Size(69, 25);
+            label13.TabIndex = 3;
+            label13.Text = "label13";
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(dataGridView1);
+            groupBox5.Location = new Point(17, 643);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(1029, 329);
+            groupBox5.TabIndex = 2;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "History";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(29, 34);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.RowTemplate.Height = 33;
+            dataGridView1.Size = new Size(981, 289);
+            dataGridView1.TabIndex = 0;
+            // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(1074, 598);
+            button1.Location = new Point(1060, 716);
             button1.Name = "button1";
             button1.Size = new Size(374, 256);
             button1.TabIndex = 1;
             button1.Text = "Get Voucher";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += get_voucher_button_Click;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(border_pass_pictureBox);
             groupBox2.Controls.Add(pictureBox1);
             groupBox2.Controls.Add(textBox12);
             groupBox2.Controls.Add(label12);
@@ -112,16 +145,16 @@
             groupBox2.Controls.Add(groupBox3);
             groupBox2.Location = new Point(22, 30);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1426, 490);
+            groupBox2.Size = new Size(1426, 607);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Detail";
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(1052, 30);
+            pictureBox1.Location = new Point(1141, 30);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(368, 441);
+            pictureBox1.Size = new Size(209, 216);
             pictureBox1.TabIndex = 18;
             pictureBox1.TabStop = false;
             // 
@@ -361,34 +394,13 @@
             label1.TabIndex = 0;
             label1.Text = "Name:";
             // 
-            // groupBox5
+            // border_pass_pictureBox
             // 
-            groupBox5.Controls.Add(dataGridView1);
-            groupBox5.Location = new Point(25, 525);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(1029, 329);
-            groupBox5.TabIndex = 2;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "History";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(1229, 553);
-            label13.Name = "label13";
-            label13.Size = new Size(69, 25);
-            label13.TabIndex = 3;
-            label13.Text = "label13";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 34);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(981, 289);
-            dataGridView1.TabIndex = 0;
+            border_pass_pictureBox.Location = new Point(1038, 266);
+            border_pass_pictureBox.Name = "border_pass_pictureBox";
+            border_pass_pictureBox.Size = new Size(382, 335);
+            border_pass_pictureBox.TabIndex = 19;
+            border_pass_pictureBox.TabStop = false;
             // 
             // Checkin_Form
             // 
@@ -400,6 +412,8 @@
             Text = "CheckingVoucher";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -407,8 +421,7 @@
             groupBox4.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -447,5 +460,6 @@
         private GroupBox groupBox5;
         private Label label13;
         private DataGridView dataGridView1;
+        private PictureBox border_pass_pictureBox;
     }
 }
