@@ -1,9 +1,16 @@
+using Domain.Command;
+using Domain.Handler;
+using Domain.Model;
 using Domain.Repository;
 using Infrastruceture.Environments;
 using Infrastruceture.Repository;
+using MediatR;
+using Mongo.Migration.Startup;
+using Mongo.Migration.Startup.DotNetCore;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using Serilog;
 
 namespace Api.ExtensionService;
 
@@ -21,13 +28,25 @@ public static class ExtensionService
 
         var environmentsConfig = new EnvironmentsConfig(configuration);
         var connectionString = environmentsConfig.GetConnectionString("MongoDb");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            Log.Error($"MongoDb Conn:{connectionString}");
+            Environment.Exit(0);
+        }
+        services.AddMigration(new MongoMigrationSettings()
+        {
+            ConnectionString =connectionString,
+            Database = "pp-app"
+        });
+            
         services.AddSingleton<IMongoClient, MongoClient>(sp => new MongoClient(connectionString));
-        services.AddTransient(typeof(IMongoRepository<>), typeof(MongoRepository<>));
+        services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
     }
 
     public static void AddCommandHandler(this IServiceCollection services)
     {
-        //services.AddTransient<IRequestHandler<GetUpLineCommand, ModelResponse>, GetUpLineCommandHandler>();
+        services.AddTransient<IRequestHandler<AccessTokenGetCommand, ModelResponse>, AccessTokenGetCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)

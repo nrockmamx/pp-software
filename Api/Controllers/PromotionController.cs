@@ -1,5 +1,7 @@
+using Api.ExtensionService;
 using Domain.Model;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ILogger = Serilog.ILogger;
 
@@ -23,8 +25,9 @@ namespace Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet("sum-promotion/{dt}")]
-        public async Task<ActionResult<ModelResponse>> SumPromotion(DateTime dt, CancellationToken cancellationToken = default)
+        [HttpPost("borderpass/checkin")]
+        [AuthTokenRequired]
+        public async Task<ActionResult<ModelResponse>> SumPromotion(CancellationToken cancellationToken = default)
         {
             try
             {

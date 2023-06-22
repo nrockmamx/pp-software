@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text;
 using Api.ExtensionService;
+using Api.MiddleWare;
 using Domain.Environments;
 using Infrastruceture.Environments;
 using Domain.Repository;
@@ -45,6 +46,7 @@ builder.Services.AddSingleton<IRestAPI, RestAPI>();
 builder.Services.AddRedis(builder.Configuration);
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddCommandHandler();
+builder.Services.AddHttpContextAccessor();
 //builder.Services.AddHostedService<ServiceStart>();
 
 builder.Services.AddResponseCompression(options =>
@@ -60,6 +62,8 @@ app.UseResponseCompression();
 
 app.MapControllers();
 app.UseSerilogRequestLogging();
+
+app.UseMyMiddleware();
 
 app.MapHealthChecks("/health", new HealthCheckOptions { ResponseWriter = WriteResponse });
 

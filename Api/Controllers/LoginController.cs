@@ -1,3 +1,4 @@
+using Domain.Command;
 using Domain.Model;
 using Domain.Model.Request;
 using MediatR;
@@ -29,12 +30,12 @@ namespace Api.Controllers
         {
             try
             {
-                /*var resp = await _mediator.Send(new SumPromotionCommand()
+                var resp = await _mediator.Send(new AccessTokenGetCommand()
                 {
-                    Dt = dt
+                    AccessTokenGetRequest = accessTokenGetRequest
                 });
  
-                return resp;*/
+                return resp;
                 return null;
             }
             catch (Exception e)
