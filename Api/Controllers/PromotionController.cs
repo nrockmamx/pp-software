@@ -1,5 +1,7 @@
 using Api.ExtensionService;
+using Domain.Command;
 using Domain.Model;
+using Domain.Model.Request;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,16 +29,16 @@ namespace Api.Controllers
 
         [HttpPost("borderpass/checkin")]
         [AuthTokenRequired]
-        public async Task<ActionResult<ModelResponse>> SumPromotion(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<ModelResponse>> SumPromotion(PromotionCheckInRequest promotionCheckInRequest,CancellationToken cancellationToken = default)
         {
             try
             {
-                /*var resp = await _mediator.Send(new SumPromotionCommand()
+                var resp = await _mediator.Send(new PromotionCheckInCommand()
                 {
-                    Dt = dt
+                    PromotionCheckInRequest = promotionCheckInRequest
                 });
  
-                return resp;*/
+                return resp;
                 return null;
             }
             catch (Exception e)

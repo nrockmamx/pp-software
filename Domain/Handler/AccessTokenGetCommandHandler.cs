@@ -51,7 +51,7 @@ public class AccessTokenGetCommandHandler : IRequestHandler<AccessTokenGetComman
                         new Claim("Username", check.Username),
 
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    Expires = DateTime.UtcNow.AddDays(7),
                     Issuer = issuer,
                     Audience = audience,
                     SigningCredentials = new SigningCredentials

@@ -47,6 +47,7 @@ public static class ExtensionService
     public static void AddCommandHandler(this IServiceCollection services)
     {
         services.AddTransient<IRequestHandler<AccessTokenGetCommand, ModelResponse>, AccessTokenGetCommandHandler>();
+        services.AddTransient<IRequestHandler<PromotionCheckInCommand, ModelResponse>, PromotionCheckInCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)

@@ -1,6 +1,7 @@
-namespace Domain.Model.Request;
+namespace Domain.MongoDB.Collections;
 
-public class PromotionCheckInRequest
+[BsonCollection("iden_card")]
+public class IdenCard  : Document
 {
     public string Ssid { get; set; }
     public string NameTh { get; set; }
@@ -11,5 +12,4 @@ public class PromotionCheckInRequest
     public DateTime DateOfBirth { get; set; }
     public string PersonalImage { get; set; }
     public string PassportImage { get; set; }
-    public decimal Amount { get; set; }
 }
