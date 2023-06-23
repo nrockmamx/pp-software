@@ -29,54 +29,48 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            label13 = new Label();
+            checkin_button = new Button();
             groupBox5 = new GroupBox();
             dataGridView1 = new DataGridView();
-            button1 = new Button();
+            read_card_button = new Button();
             groupBox2 = new GroupBox();
-            pictureBox1 = new PictureBox();
-            textBox12 = new TextBox();
-            label12 = new Label();
-            textBox11 = new TextBox();
+            addressTh_textBox = new TextBox();
+            label3 = new Label();
+            border_pass_pictureBox = new PictureBox();
+            personal_pictureBox = new PictureBox();
+            ed_textBox = new TextBox();
             label11 = new Label();
-            textBox10 = new TextBox();
+            ssid_textBox = new TextBox();
             label10 = new Label();
-            textBox9 = new TextBox();
+            is_textBox = new TextBox();
             label9 = new Label();
-            textBox8 = new TextBox();
+            dob_textBox = new TextBox();
             label8 = new Label();
-            textBox7 = new TextBox();
-            label7 = new Label();
             groupBox4 = new GroupBox();
-            textBox4 = new TextBox();
-            label4 = new Label();
             textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            nameEng_textBox = new TextBox();
             label5 = new Label();
             label6 = new Label();
             groupBox3 = new GroupBox();
-            textBox3 = new TextBox();
-            label3 = new Label();
             textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            nameTh_textBox = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            border_pass_pictureBox = new PictureBox();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)personal_pictureBox).BeginInit();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label13);
+            groupBox1.Controls.Add(checkin_button);
             groupBox1.Controls.Add(groupBox5);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(read_card_button);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Location = new Point(29, 19);
             groupBox1.Name = "groupBox1";
@@ -85,21 +79,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Border Pass CheckIn ";
             // 
-            // label13
+            // checkin_button
             // 
-            label13.AutoSize = true;
-            label13.Location = new Point(1223, 672);
-            label13.Name = "label13";
-            label13.Size = new Size(69, 25);
-            label13.TabIndex = 3;
-            label13.Text = "label13";
+            checkin_button.Enabled = false;
+            checkin_button.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
+            checkin_button.Location = new Point(1052, 702);
+            checkin_button.Name = "checkin_button";
+            checkin_button.Size = new Size(382, 93);
+            checkin_button.TabIndex = 3;
+            checkin_button.Text = "Check In";
+            checkin_button.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
             groupBox5.Controls.Add(dataGridView1);
-            groupBox5.Location = new Point(17, 643);
+            groupBox5.Location = new Point(17, 572);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(1029, 329);
+            groupBox5.Size = new Size(1029, 400);
             groupBox5.TabIndex = 2;
             groupBox5.TabStop = false;
             groupBox5.Text = "History";
@@ -114,184 +110,156 @@
             dataGridView1.Size = new Size(981, 289);
             dataGridView1.TabIndex = 0;
             // 
-            // button1
+            // read_card_button
             // 
-            button1.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(1060, 716);
-            button1.Name = "button1";
-            button1.Size = new Size(374, 256);
-            button1.TabIndex = 1;
-            button1.Text = "Get Voucher";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += get_voucher_button_Click;
+            read_card_button.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
+            read_card_button.Location = new Point(1052, 584);
+            read_card_button.Name = "read_card_button";
+            read_card_button.Size = new Size(382, 93);
+            read_card_button.TabIndex = 1;
+            read_card_button.Text = "Read Card";
+            read_card_button.UseVisualStyleBackColor = true;
+            read_card_button.Click += get_voucher_button_Click;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(addressTh_textBox);
+            groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(border_pass_pictureBox);
-            groupBox2.Controls.Add(pictureBox1);
-            groupBox2.Controls.Add(textBox12);
-            groupBox2.Controls.Add(label12);
-            groupBox2.Controls.Add(textBox11);
+            groupBox2.Controls.Add(personal_pictureBox);
+            groupBox2.Controls.Add(ed_textBox);
             groupBox2.Controls.Add(label11);
-            groupBox2.Controls.Add(textBox10);
+            groupBox2.Controls.Add(ssid_textBox);
             groupBox2.Controls.Add(label10);
-            groupBox2.Controls.Add(textBox9);
+            groupBox2.Controls.Add(is_textBox);
             groupBox2.Controls.Add(label9);
-            groupBox2.Controls.Add(textBox8);
+            groupBox2.Controls.Add(dob_textBox);
             groupBox2.Controls.Add(label8);
-            groupBox2.Controls.Add(textBox7);
-            groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(groupBox4);
             groupBox2.Controls.Add(groupBox3);
             groupBox2.Location = new Point(22, 30);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1426, 607);
+            groupBox2.Size = new Size(1426, 536);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Detail";
             // 
-            // pictureBox1
+            // addressTh_textBox
             // 
-            pictureBox1.Location = new Point(1141, 30);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(209, 216);
-            pictureBox1.TabIndex = 18;
-            pictureBox1.TabStop = false;
+            addressTh_textBox.Location = new Point(173, 153);
+            addressTh_textBox.Multiline = true;
+            addressTh_textBox.Name = "addressTh_textBox";
+            addressTh_textBox.ReadOnly = true;
+            addressTh_textBox.Size = new Size(341, 183);
+            addressTh_textBox.TabIndex = 5;
             // 
-            // textBox12
+            // label3
             // 
-            textBox12.Location = new Point(685, 357);
-            textBox12.Name = "textBox12";
-            textBox12.ReadOnly = true;
-            textBox12.Size = new Size(339, 31);
-            textBox12.TabIndex = 16;
+            label3.AutoSize = true;
+            label3.Location = new Point(86, 153);
+            label3.Name = "label3";
+            label3.Size = new Size(81, 25);
+            label3.TabIndex = 4;
+            label3.Text = "Address:";
             // 
-            // label12
+            // border_pass_pictureBox
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(562, 360);
-            label12.Name = "label12";
-            label12.Size = new Size(121, 25);
-            label12.TabIndex = 17;
-            label12.Text = "Register Date:";
+            border_pass_pictureBox.BorderStyle = BorderStyle.Fixed3D;
+            border_pass_pictureBox.Location = new Point(1076, 18);
+            border_pass_pictureBox.Name = "border_pass_pictureBox";
+            border_pass_pictureBox.Size = new Size(322, 267);
+            border_pass_pictureBox.TabIndex = 19;
+            border_pass_pictureBox.TabStop = false;
             // 
-            // textBox11
+            // personal_pictureBox
             // 
-            textBox11.Location = new Point(685, 394);
-            textBox11.Name = "textBox11";
-            textBox11.ReadOnly = true;
-            textBox11.Size = new Size(339, 31);
-            textBox11.TabIndex = 14;
+            personal_pictureBox.BorderStyle = BorderStyle.Fixed3D;
+            personal_pictureBox.Location = new Point(1110, 291);
+            personal_pictureBox.Name = "personal_pictureBox";
+            personal_pictureBox.Size = new Size(275, 230);
+            personal_pictureBox.TabIndex = 18;
+            personal_pictureBox.TabStop = false;
+            // 
+            // ed_textBox
+            // 
+            ed_textBox.Location = new Point(687, 152);
+            ed_textBox.Name = "ed_textBox";
+            ed_textBox.ReadOnly = true;
+            ed_textBox.Size = new Size(339, 31);
+            ed_textBox.TabIndex = 14;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(576, 396);
+            label11.Location = new Point(578, 154);
             label11.Name = "label11";
             label11.Size = new Size(105, 25);
             label11.TabIndex = 15;
             label11.Text = "Expire Date:";
             // 
-            // textBox10
+            // ssid_textBox
             // 
-            textBox10.Location = new Point(685, 431);
-            textBox10.Name = "textBox10";
-            textBox10.ReadOnly = true;
-            textBox10.Size = new Size(339, 31);
-            textBox10.TabIndex = 12;
+            ssid_textBox.Location = new Point(687, 189);
+            ssid_textBox.Name = "ssid_textBox";
+            ssid_textBox.ReadOnly = true;
+            ssid_textBox.Size = new Size(339, 31);
+            ssid_textBox.TabIndex = 12;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(605, 434);
+            label10.Location = new Point(607, 192);
             label10.Name = "label10";
             label10.Size = new Size(74, 25);
             label10.TabIndex = 13;
             label10.Text = "Card Id:";
             // 
-            // textBox9
+            // is_textBox
             // 
-            textBox9.Location = new Point(148, 428);
-            textBox9.Name = "textBox9";
-            textBox9.ReadOnly = true;
-            textBox9.Size = new Size(339, 31);
-            textBox9.TabIndex = 10;
+            is_textBox.Location = new Point(687, 266);
+            is_textBox.Name = "is_textBox";
+            is_textBox.ReadOnly = true;
+            is_textBox.Size = new Size(339, 31);
+            is_textBox.TabIndex = 10;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(63, 434);
+            label9.Location = new Point(602, 272);
             label9.Name = "label9";
             label9.Size = new Size(79, 25);
             label9.TabIndex = 11;
             label9.Text = "Issue At:";
             // 
-            // textBox8
+            // dob_textBox
             // 
-            textBox8.Location = new Point(148, 390);
-            textBox8.Name = "textBox8";
-            textBox8.ReadOnly = true;
-            textBox8.Size = new Size(339, 31);
-            textBox8.TabIndex = 8;
+            dob_textBox.Location = new Point(687, 228);
+            dob_textBox.Name = "dob_textBox";
+            dob_textBox.ReadOnly = true;
+            dob_textBox.Size = new Size(339, 31);
+            dob_textBox.TabIndex = 8;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(25, 396);
+            label8.Location = new Point(564, 234);
             label8.Name = "label8";
             label8.Size = new Size(117, 25);
             label8.TabIndex = 9;
             label8.Text = "Date of birth:";
             // 
-            // textBox7
-            // 
-            textBox7.Location = new Point(148, 354);
-            textBox7.Name = "textBox7";
-            textBox7.ReadOnly = true;
-            textBox7.Size = new Size(339, 31);
-            textBox7.TabIndex = 6;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(99, 360);
-            label7.Name = "label7";
-            label7.Size = new Size(43, 25);
-            label7.TabIndex = 7;
-            label7.Text = "Sex:";
-            // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(textBox4);
-            groupBox4.Controls.Add(label4);
             groupBox4.Controls.Add(textBox5);
-            groupBox4.Controls.Add(textBox6);
+            groupBox4.Controls.Add(nameEng_textBox);
             groupBox4.Controls.Add(label5);
             groupBox4.Controls.Add(label6);
             groupBox4.Location = new Point(539, 30);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(493, 311);
+            groupBox4.Size = new Size(493, 116);
             groupBox4.TabIndex = 6;
             groupBox4.TabStop = false;
             groupBox4.Text = "English";
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(146, 112);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(341, 179);
-            textBox4.TabIndex = 5;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(59, 112);
-            label4.Name = "label4";
-            label4.Size = new Size(81, 25);
-            label4.TabIndex = 4;
-            label4.Text = "Address:";
             // 
             // textBox5
             // 
@@ -301,13 +269,13 @@
             textBox5.Size = new Size(339, 31);
             textBox5.TabIndex = 3;
             // 
-            // textBox6
+            // nameEng_textBox
             // 
-            textBox6.Location = new Point(148, 39);
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new Size(339, 31);
-            textBox6.TabIndex = 2;
+            nameEng_textBox.Location = new Point(148, 39);
+            nameEng_textBox.Name = "nameEng_textBox";
+            nameEng_textBox.ReadOnly = true;
+            nameEng_textBox.Size = new Size(339, 31);
+            nameEng_textBox.TabIndex = 2;
             // 
             // label5
             // 
@@ -329,36 +297,16 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(textBox3);
-            groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(textBox2);
-            groupBox3.Controls.Add(textBox1);
+            groupBox3.Controls.Add(nameTh_textBox);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(label1);
             groupBox3.Location = new Point(25, 30);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(493, 311);
+            groupBox3.Size = new Size(493, 116);
             groupBox3.TabIndex = 0;
             groupBox3.TabStop = false;
             groupBox3.Text = "Thai";
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(146, 112);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(341, 179);
-            textBox3.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(59, 112);
-            label3.Name = "label3";
-            label3.Size = new Size(81, 25);
-            label3.TabIndex = 4;
-            label3.Text = "Address:";
             // 
             // textBox2
             // 
@@ -368,13 +316,13 @@
             textBox2.Size = new Size(339, 31);
             textBox2.TabIndex = 3;
             // 
-            // textBox1
+            // nameTh_textBox
             // 
-            textBox1.Location = new Point(148, 39);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(339, 31);
-            textBox1.TabIndex = 2;
+            nameTh_textBox.Location = new Point(148, 39);
+            nameTh_textBox.Name = "nameTh_textBox";
+            nameTh_textBox.ReadOnly = true;
+            nameTh_textBox.Size = new Size(339, 31);
+            nameTh_textBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -394,14 +342,6 @@
             label1.TabIndex = 0;
             label1.Text = "Name:";
             // 
-            // border_pass_pictureBox
-            // 
-            border_pass_pictureBox.Location = new Point(1038, 266);
-            border_pass_pictureBox.Name = "border_pass_pictureBox";
-            border_pass_pictureBox.Size = new Size(382, 335);
-            border_pass_pictureBox.TabIndex = 19;
-            border_pass_pictureBox.TabStop = false;
-            // 
             // Checkin_Form
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -411,55 +351,48 @@
             Name = "Checkin_Form";
             Text = "CheckingVoucher";
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)personal_pictureBox).EndInit();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox1;
-        private Button button1;
+        private Button read_card_button;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private TextBox textBox1;
+        private TextBox nameTh_textBox;
         private Label label2;
         private Label label1;
-        private TextBox textBox3;
+        private TextBox addressTh_textBox;
         private Label label3;
         private TextBox textBox2;
         private GroupBox groupBox4;
-        private TextBox textBox4;
-        private Label label4;
         private TextBox textBox5;
-        private TextBox textBox6;
+        private TextBox nameEng_textBox;
         private Label label5;
         private Label label6;
-        private PictureBox pictureBox1;
-        private TextBox textBox12;
-        private Label label12;
-        private TextBox textBox11;
+        private PictureBox personal_pictureBox;
+        private TextBox ed_textBox;
         private Label label11;
-        private TextBox textBox10;
+        private TextBox ssid_textBox;
         private Label label10;
-        private TextBox textBox9;
+        private TextBox is_textBox;
         private Label label9;
-        private TextBox textBox8;
+        private TextBox dob_textBox;
         private Label label8;
-        private TextBox textBox7;
-        private Label label7;
         private GroupBox groupBox5;
-        private Label label13;
         private DataGridView dataGridView1;
         private PictureBox border_pass_pictureBox;
+        private Button checkin_button;
     }
 }

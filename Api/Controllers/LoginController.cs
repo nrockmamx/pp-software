@@ -36,7 +36,6 @@ namespace Api.Controllers
                 });
  
                 return resp;
-                return null;
             }
             catch (Exception e)
             {

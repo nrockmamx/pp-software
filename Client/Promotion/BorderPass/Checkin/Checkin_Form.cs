@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using System.Drawing.Drawing2D;
+using RestSharp;
+using Domain.Model;
 
 namespace Client.Promotion.BorderPass.CheckingVoucher
 {
@@ -32,13 +34,61 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
         private void captureVideo(object sender, NewFrameEventArgs e)
         {
             Size size = new Size(382, 335);
-            border_pass_pictureBox.Image = resizeImage((Bitmap)e.Frame.Clone(),size);
+            border_pass_pictureBox.Image = resizeImage((Bitmap)e.Frame.Clone(), size);
         }
 
-        private void get_voucher_button_Click(object sender, EventArgs e)
+        private async void get_voucher_button_Click(object sender, EventArgs e)
         {
-            var filename = "webcam.jpg";
-            border_pass_pictureBox.Image.Save(filename);
+            try
+            {
+
+                var client = new RestClient("http://localhost:21998");
+                var request = new RestRequest($"info");
+
+                var res = await client.ExecuteGetAsync(request);
+
+                if (!res.IsSuccessful)
+                {
+                    MessageBox.Show("Can't find Driver Card Iden Reader", "Error");
+                    return;
+                }
+
+
+                request = new RestRequest($"readCard");
+
+                res = await client.ExecuteGetAsync(request);
+
+                if (!res.IsSuccessful)
+                {
+                    MessageBox.Show("Please input card to reader", "Error");
+                    return;
+                }
+
+                var card = Newtonsoft.Json.JsonConvert.DeserializeObject<CardReader>(res.Content.ToString());
+
+                if (card != null)
+                {
+                    addressTh_textBox.Text = $"{card.address_no} {card.address_moo} {card.address_road} {card.address_soi} {card.address_trok} {card.address_tumbol} {card.address_amphor} {card.address_provinice}";
+                    dob_textBox.Text = card.birthdate;
+                    nameEng_textBox.Text = $"{card.fname_en} {card.sname_en}";
+                    nameTh_textBox.Text = $"{card.fname_th} {card.sname_th}";
+                    ssid_textBox.Text = card.nat_id;
+                    is_textBox.Text = card.issuer;
+                    ed_textBox.Text = card.issue_expire;
+                    var bitMap = MasterCache.Base64StringToBitmap(card.photo);
+                    personal_pictureBox.Image = (Image)bitMap;
+                    checkin_button.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Can't read card", "Error");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please check card", "Error");
+            }
         }
 
         private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
