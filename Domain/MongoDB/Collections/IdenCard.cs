@@ -9,6 +9,7 @@ public class IdenCard  : Document
     public string AddressTh { get; set; }
     public string AddressEng { get; set; }
     public string Tel { get; set; }
+    public string Sex { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string PersonalImage { get; set; }
     public string PassportImage { get; set; }

@@ -1,3 +1,5 @@
+using static Emgu.CV.VideoCapture;
+
 namespace Client
 {
     internal static class Program
@@ -8,8 +10,13 @@ namespace Client
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+
+#if DEBUG
+            MasterCache.ApiUrl = "https://dev-pp-software.newryapis-nonprod.com";
+#else
+            MasterCache.ApiUrl = "https://pp-software.nry-apis.com"; 
+#endif
+
             ApplicationConfiguration.Initialize();
             Application.Run(new Login());          
         }

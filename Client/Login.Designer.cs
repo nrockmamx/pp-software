@@ -30,9 +30,9 @@
         {
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            button1 = new Button();
+            username_textBox = new TextBox();
+            password_textBox = new TextBox();
+            login_button = new Button();
             SuspendLayout();
             // 
             // label1
@@ -53,28 +53,30 @@
             label2.TabIndex = 1;
             label2.Text = "Password:";
             // 
-            // textBox1
+            // username_textBox
             // 
-            textBox1.Location = new Point(128, 14);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(232, 31);
-            textBox1.TabIndex = 2;
+            username_textBox.Location = new Point(128, 14);
+            username_textBox.Name = "username_textBox";
+            username_textBox.Size = new Size(232, 31);
+            username_textBox.TabIndex = 2;
             // 
-            // textBox2
+            // password_textBox
             // 
-            textBox2.Location = new Point(128, 60);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(232, 31);
-            textBox2.TabIndex = 3;
+            password_textBox.Location = new Point(128, 60);
+            password_textBox.Name = "password_textBox";
+            password_textBox.PasswordChar = '*';
+            password_textBox.Size = new Size(232, 31);
+            password_textBox.TabIndex = 3;
             // 
-            // button1
+            // login_button
             // 
-            button1.Location = new Point(128, 114);
-            button1.Name = "button1";
-            button1.Size = new Size(232, 61);
-            button1.TabIndex = 4;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
+            login_button.Location = new Point(128, 114);
+            login_button.Name = "login_button";
+            login_button.Size = new Size(232, 61);
+            login_button.TabIndex = 4;
+            login_button.Text = "Login";
+            login_button.UseVisualStyleBackColor = true;
+            login_button.Click += login_button_Click;
             // 
             // Login
             // 
@@ -82,9 +84,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(386, 196);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(login_button);
+            Controls.Add(password_textBox);
+            Controls.Add(username_textBox);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Login";
@@ -97,8 +99,8 @@
 
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Button button1;
+        private TextBox username_textBox;
+        private TextBox password_textBox;
+        private Button login_button;
     }
 }

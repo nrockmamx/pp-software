@@ -101,7 +101,7 @@ node('jenkins-slave') {
         sh 'aws iam get-user'
         echo 'authen with aws credentials successfully'
         withKubeConfig(credentialsId: 'kubeconfig-newry-api-prod') {
-          sh "helm upgrade -i ${env.PROJECT_NAME_SERVICE} --namespace ${env.BRANCH_NAME} --wait -f deployment.yaml --set-string image.repository=${env.IMAGE_NAME_PROD} --set-string image.tag=${env.IMAGE_TAG_SERVICE} --set replicaCount=2 ./helm-dynamic-deployment"
+          sh "helm upgrade -i ${env.PROJECT_NAME_SERVICE} --namespace ${env.BRANCH_NAME} --wait -f deployment.yaml --set-string image.repository=${env.IMAGE_NAME_PROD} --set-string image.tag=${env.IMAGE_TAG_SERVICE} --set replicaCount=1 ./helm-dynamic-deployment"
         }
       }
     } /* end stage deploy */

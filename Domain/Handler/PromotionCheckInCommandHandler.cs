@@ -58,7 +58,7 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
             {
                 var checkPro = _repositoryPromotionCheckIn.GetCollection()
                     .WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
-                    .Where(x => x.IdenCard.Ssid == check.Ssid && x.Dt==DateTime.Now.Date.ToString()).FirstOrDefault();
+                    .Where(x => x.IdenCard.Ssid == check.Ssid && x.Dt==DateTime.Now.Date.ToString("dd-MM-yyyy")).FirstOrDefault();
 
                 if (checkPro != null)
                 {
@@ -71,7 +71,7 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
                 promotionCheckIn.CheckInTime = DateTime.Now;
                 promotionCheckIn.Amount = request.PromotionCheckInRequest.Amount;
                 promotionCheckIn.PassportImage = request.PromotionCheckInRequest.PassportImage;
-                promotionCheckIn.Dt = DateTime.Now.Date.ToString();
+                promotionCheckIn.Dt = DateTime.Now.Date.ToString("dd-MM-yyyy");
                 await _repositoryPromotionCheckIn.InsertOneAsync(promotionCheckIn);
                 modelResponse.Success();
             }

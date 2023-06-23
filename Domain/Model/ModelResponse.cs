@@ -14,6 +14,12 @@ namespace Domain.Model
             public long totalPages { get; set; } = 0;
         }
 
+        public T GetData<T>()
+        {
+            var v = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(this.data.ToString());
+            return v;
+        }
+
         public bool GetStatus()
         {
             if (status == "success")
