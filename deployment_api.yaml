@@ -1,0 +1,64 @@
+# Default values for generic-deployment.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: {}
+
+image:
+  repository: 672492626033.dkr.ecr.ap-southeast-1.amazonaws.com/newry-nonprod
+  pullPolicy: Always
+imagePullSecrets:
+ - registry-pull-secret
+
+nameOverride: pp-software
+fullnameOverride: pp-software
+
+
+MapRef: pp-software-configmap
+
+containerPorts:
+  - 8080
+
+cpurequests: {}
+memoryrequests: {}
+cpulimits: {}
+memorylimits: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+service:
+  enabled: true
+  type: ClusterIP
+  annotation: {}
+  ports:
+    - protocol: TCP
+      externalPort: 8080
+      internalPort: 8080
+
+serviceHeadless:
+  enabled: false
+
+healthCheck:
+  enabled: true
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 60
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 60
+    successThreshold: 1
+    failureThreshold: 2
+
+ingress:
+  enabled: false
+  annotations: {}
