@@ -13,7 +13,7 @@ WORKDIR "/src/Api"
 RUN dotnet build "Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Api.csproj" -c Release -o /app/publish -p:PublishTrimmed=true -r linux-musl-x64
+RUN dotnet publish "Api.csproj" -c Release -o /app/publish 
 
 ENV TZ=Asia/Bangkok
 
@@ -21,8 +21,6 @@ FROM base AS final
 WORKDIR /app/Api
 COPY --from=publish /app/publish .
 ADD Api/appsettings.json appsettings.json
-ADD Api/conf conf
-ADD Api/cert cert
 
 ENV TZ='Asia/Bangkok'
 RUN apk add --no-cache tzdata
