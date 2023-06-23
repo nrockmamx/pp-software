@@ -1,0 +1,12 @@
+[submodule "helm-dynamic-deployment"]
+	path = helm-dynamic-deployment
+	url = https://github.com/nvenger-technology/helm-dynamic-deployment.git
+	branch = main
+[submodule "newry-dotnet-common"]
+	path = newry-dotnet-common
+	url = https://github.com/nvenger-technology/newry-dotnet-common.git
+	branch = develop
+[submodule "newry-SharedLib"]
+	path = newry-SharedLib
+	url = https://github.com/nvenger-technology/newry-SharedLib.git
+	branch = develop
