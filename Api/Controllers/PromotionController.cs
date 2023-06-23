@@ -47,5 +47,48 @@ namespace Api.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpGet("borderpass/check/{ssid}")]
+        [AuthTokenRequired]
+        public async Task<ActionResult<ModelResponse>> PromotionCheckInCheck(string ssid,CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var resp = await _mediator.Send(new PromotionCheckInCheckCommand()
+                {
+                    Ssid = ssid
+                });
+ 
+                return resp;
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error("{Message}",e.ToString());
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("borderpass/history/{ssid}/{page}")]
+        [AuthTokenRequired]
+        public async Task<ActionResult<ModelResponse>> PromotionCheckInHistory(string ssid,int page = 1,CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var resp = await _mediator.Send(new PromotionCheckInHistoryCommand()
+                {
+                    Ssid = ssid,
+                    Page = page
+                });
+ 
+                return resp;
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error("{Message}",e.ToString());
+                return BadRequest();
+            }
+        }
     }
 }
