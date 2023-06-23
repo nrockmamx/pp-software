@@ -30,4 +30,13 @@
     <ProjectReference Include="..\Infrastruceture\Infrastruceture.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\docker-compose.yml">
+      <Link>docker-compose.yml</Link>
+    </Content>
+    <Content Include="..\Dockerfile.Api">
+      <Link>Dockerfile.Api</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>
