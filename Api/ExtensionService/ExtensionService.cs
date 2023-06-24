@@ -50,6 +50,7 @@ public static class ExtensionService
         services.AddTransient<IRequestHandler<PromotionCheckInCommand, ModelResponse>, PromotionCheckInCommandHandler>();
         services.AddTransient<IRequestHandler<PromotionCheckInCheckCommand, ModelResponse>, PromotionCheckInCheckCommandHandler>();
         services.AddTransient<IRequestHandler<PromotionCheckInHistoryCommand, ModelResponse>, PromotionCheckInHistoryCommandHandler>();
+        services.AddTransient<IRequestHandler<SurveyRegisterCommand, ModelResponse>,SurveyRegisterCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)

@@ -33,7 +33,7 @@ public class AuthMiddleware
     public async Task Invoke(HttpContext context)
     {
         string token = context.Request.Headers["Authorization"];
-
+        
         if (token != null)
         {
             try
