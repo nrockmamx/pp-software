@@ -6,6 +6,7 @@ public class SurveyRegisterRequest
     public string Tel { get; set; }
     public string Province { get; set; }
     public string LineId { get; set; }
+    public string Travel { get; set; }
     public List<string> Like { get; set; }
     public decimal Budget { get; set; }
 }
