@@ -4,6 +4,6 @@ using MediatR;
 
 namespace Domain.Command;
 
-public class MemberGenCommand  :  IRequest<ModelResponse>
+public class MemberCardGenCommand  :  IRequest<ModelResponse>
 {
 }

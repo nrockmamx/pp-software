@@ -13,7 +13,7 @@ namespace Api.Controllers
     [ProducesResponseType(typeof(ModelResponse),StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ModelResponse),StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ModelResponse),StatusCodes.Status500InternalServerError)]
-    [Route("v1/survey/")]
+    [Route("v1/member/")]
     public class MemberController : ControllerBase
     {
         private readonly Serilog.ILogger _logger;
@@ -25,12 +25,12 @@ namespace Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost("generate")]
+        [HttpGet("generate")]
         public async Task<ActionResult<ModelResponse>> Generate()
         {
             try
             {
-                var resp = await _mediator.Send(new SurveyRegisterCommand()
+                var resp = await _mediator.Send(new MemberCardGenCommand()
                 {
                     
                 });
