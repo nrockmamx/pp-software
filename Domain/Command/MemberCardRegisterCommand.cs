@@ -6,5 +6,5 @@ namespace Domain.Command;
 
 public class MemberCardRegisterCommand  :  IRequest<ModelResponse>
 {
-    public MemberCarRegisterRequest MemberCarRegisterRequest = new MemberCarRegisterRequest();
+    public MemberCardRegisterRequest MemberCardRegisterRequest = new MemberCardRegisterRequest();
 }

@@ -36,14 +36,14 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
         ModelResponse modelResponse = new ModelResponse();
         try
         {
-            if (request.MemberCarRegisterRequest.CardId.Length < 10)
+            if (request.MemberCardRegisterRequest.CardId.Length < 10)
             {
                 modelResponse.data = "CARDID_ERROR";
                 return modelResponse;
             }
 
             var check = _repositoryMemberGen.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
-                .AsQueryable().Where(x => x.CardId == request.MemberCarRegisterRequest.CardId)
+                .AsQueryable().Where(x => x.CardId == request.MemberCardRegisterRequest.CardId)
                 .FirstOrDefault();
 
             if (check == null)
@@ -59,7 +59,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
             }
 
             var checkMember = _repositoryMember.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
-                .AsQueryable().Where(x => x.CardId == request.MemberCarRegisterRequest.CardId)
+                .AsQueryable().Where(x => x.CardId == request.MemberCardRegisterRequest.CardId)
                 .FirstOrDefault();
 
             if (checkMember != null)
@@ -68,35 +68,35 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
                 return modelResponse;
             }
             
-            if (string.IsNullOrEmpty(request.MemberCarRegisterRequest.NickName))
+            if (string.IsNullOrEmpty(request.MemberCardRegisterRequest.NickName))
             {
                 modelResponse.data = "NICKNAME_ERROR";
                 return modelResponse;
             }
 
             MemberCard memberCard = new MemberCard();
-            memberCard.CardId = request.MemberCarRegisterRequest.CardId;
-            memberCard.NickName = request.MemberCarRegisterRequest.NickName;
+            memberCard.CardId = request.MemberCardRegisterRequest.CardId;
+            memberCard.NickName = request.MemberCardRegisterRequest.NickName;
 
-            if (request.MemberCarRegisterRequest.CardIden != null)
+            if (request.MemberCardRegisterRequest.CardIden != null)
             {
                 memberCard.IdenCard = new IdenCard();
-                memberCard.IdenCard.Ssid = request.MemberCarRegisterRequest.CardIden.Ssid;
-                memberCard.IdenCard.Tel = request.MemberCarRegisterRequest.Tel;
+                memberCard.IdenCard.Ssid = request.MemberCardRegisterRequest.CardIden.Ssid;
+                memberCard.IdenCard.Tel = request.MemberCardRegisterRequest.Tel;
                 memberCard.RegisterDate = DateTime.Now;
-                memberCard.IdenCard.AddressEng = request.MemberCarRegisterRequest.CardIden.AddressEng;
-                memberCard.IdenCard.AddressTh = request.MemberCarRegisterRequest.CardIden.AddressTh;
-                memberCard.IdenCard.NameEng = request.MemberCarRegisterRequest.CardIden.NameEng;
-                memberCard.IdenCard.NameTh = request.MemberCarRegisterRequest.CardIden.NameTh;
-                memberCard.IdenCard.PassportImage = request.MemberCarRegisterRequest.CardIden.PassportImage;
-                memberCard.IdenCard.PersonalImage = request.MemberCarRegisterRequest.CardIden.PersonalImage;
-                memberCard.IdenCard.DateOfBirth = request.MemberCarRegisterRequest.CardIden.DateOfBirth;
+                memberCard.IdenCard.AddressEng = request.MemberCardRegisterRequest.CardIden.AddressEng;
+                memberCard.IdenCard.AddressTh = request.MemberCardRegisterRequest.CardIden.AddressTh;
+                memberCard.IdenCard.NameEng = request.MemberCardRegisterRequest.CardIden.NameEng;
+                memberCard.IdenCard.NameTh = request.MemberCardRegisterRequest.CardIden.NameTh;
+                memberCard.IdenCard.PassportImage = request.MemberCardRegisterRequest.CardIden.PassportImage;
+                memberCard.IdenCard.PersonalImage = request.MemberCardRegisterRequest.CardIden.PersonalImage;
+                memberCard.IdenCard.DateOfBirth = request.MemberCardRegisterRequest.CardIden.DateOfBirth;
             }
 
             var update = Builders<MemberCardGenerate>.Update;
             var updates = new List<UpdateDefinition<MemberCardGenerate>>();
             updates.Add(update.Set(x => x.Used, true));
-            await _repositoryMemberGen.UpdateOneAsync(x => x.CardId == request.MemberCarRegisterRequest.CardId, update.Combine(updates));
+            await _repositoryMemberGen.UpdateOneAsync(x => x.CardId == request.MemberCardRegisterRequest.CardId, update.Combine(updates));
             await _repositoryMember.InsertOneAsync(memberCard);
             modelResponse.Success();
 

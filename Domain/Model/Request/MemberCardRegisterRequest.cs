@@ -1,6 +1,6 @@
 namespace Domain.Model.Request;
 
-public class MemberCarRegisterRequest
+public class MemberCardRegisterRequest
 {
     public CardIdenDetail CardIden { get; set; }
     public string NickName { get; set; }
