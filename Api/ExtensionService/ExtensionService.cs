@@ -49,8 +49,12 @@ public static class ExtensionService
         services.AddTransient<IRequestHandler<AccessTokenGetCommand, ModelResponse>, AccessTokenGetCommandHandler>();
         services.AddTransient<IRequestHandler<PromotionCheckInCommand, ModelResponse>, PromotionCheckInCommandHandler>();
         services.AddTransient<IRequestHandler<PromotionCheckInCheckCommand, ModelResponse>, PromotionCheckInCheckCommandHandler>();
-        services.AddTransient<IRequestHandler<PromotionCheckInHistoryCommand, ModelResponse>, PromotionCheckInHistoryCommandHandler>();
+        services.AddTransient<IRequestHandler<PromotionCheckInHistoryBySsidCommand, ModelResponse>, PromotionCheckInHistoryBySsidCommandHandler>();
+        services.AddTransient<IRequestHandler<PromotionCheckInHistoryCommand, ModelResponse>, PromotionCheckinHistoryCommandHandler>();
         services.AddTransient<IRequestHandler<SurveyRegisterCommand, ModelResponse>,SurveyRegisterCommandHandler>();
+        services.AddTransient<IRequestHandler<MemberCardGenCommand, ModelResponse>,MemberCardGenCommandHandler>();
+        services.AddTransient<IRequestHandler<MemberCardRegisterCommand, ModelResponse>,MemberCardRegisterCommandHandler>();
+        services.AddTransient<IRequestHandler<MemberCardPrintedCommand, ModelResponse>,MemberCardPrintedCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)
