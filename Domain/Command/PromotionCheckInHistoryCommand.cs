@@ -6,6 +6,6 @@ namespace Domain.Command;
 
 public class PromotionCheckInHistoryCommand  :  IRequest<ModelResponse>
 {   
-    public string Ssid { get; set; }
-    public int Page { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 }

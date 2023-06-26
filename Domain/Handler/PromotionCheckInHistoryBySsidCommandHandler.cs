@@ -14,20 +14,20 @@ using Serilog;
 
 namespace Domain.Handler;
 
-public class PromotionCheckInHistoryCommandHandler : IRequestHandler<PromotionCheckInHistoryCommand, ModelResponse>
+public class PromotionCheckInHistoryBySsidCommandHandler : IRequestHandler<PromotionCheckInHistoryBySsidCommand, ModelResponse>
 {
     private readonly IMongoRepository<PromotionCheckIn> _repository;
     private readonly IEnvironmentsConfig _environmentsConfig;
     private readonly IMemoryStore _memoryStore;
 
-    public PromotionCheckInHistoryCommandHandler( IEnvironmentsConfig environmentsConfig, IMemoryStore memoryStore, IMongoRepository<PromotionCheckIn> repository)
+    public PromotionCheckInHistoryBySsidCommandHandler( IEnvironmentsConfig environmentsConfig, IMemoryStore memoryStore, IMongoRepository<PromotionCheckIn> repository)
     {
         _environmentsConfig = environmentsConfig;
         _memoryStore = memoryStore;
         _repository = repository;
     }
 
-    public async Task<ModelResponse> Handle(PromotionCheckInHistoryCommand request, CancellationToken cancellationToken)
+    public async Task<ModelResponse> Handle(PromotionCheckInHistoryBySsidCommand request, CancellationToken cancellationToken)
     {
         ModelResponse modelResponse = new ModelResponse();
         try

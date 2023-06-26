@@ -75,7 +75,7 @@ namespace Api.Controllers
         {
             try
             {
-                var resp = await _mediator.Send(new PromotionCheckInHistoryCommand()
+                var resp = await _mediator.Send(new PromotionCheckInHistoryBySsidCommand()
                 {
                     Ssid = ssid,
                     Page = page
