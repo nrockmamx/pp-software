@@ -55,6 +55,7 @@ public static class ExtensionService
         services.AddTransient<IRequestHandler<MemberCardGenCommand, ModelResponse>,MemberCardGenCommandHandler>();
         services.AddTransient<IRequestHandler<MemberCardRegisterCommand, ModelResponse>,MemberCardRegisterCommandHandler>();
         services.AddTransient<IRequestHandler<MemberCardPrintedCommand, ModelResponse>,MemberCardPrintedCommandHandler>();
+        services.AddTransient<IRequestHandler<MemberCardFindCommand, ModelResponse>,MemberCardFindCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)

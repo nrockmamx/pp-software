@@ -44,14 +44,33 @@ namespace Api.Controllers
             }
         }
 
+        [HttpPost("find")]
+        public async Task<ActionResult<ModelResponse>> Find(MemberCardFindRequest memberCardFindRequest)
+        {
+            try
+            {
+                var resp = await _mediator.Send(new MemberCardFindCommand()
+                {
+                    MemberCardFindRequest = memberCardFindRequest
+                });
+ 
+                return resp;
+            }
+            catch (Exception e)
+            {
+                _logger.Error("{Message}",e.ToString());
+                return BadRequest();
+            }
+        }
+
         [HttpPost("register")]
-        public async Task<ActionResult<ModelResponse>> Register(MemberCarRegisterRequest memberCarRegisterRequest)
+        public async Task<ActionResult<ModelResponse>> Register(MemberCardRegisterRequest memberCardRegisterRequest)
         {
             try
             {
                 var resp = await _mediator.Send(new MemberCardRegisterCommand()
                 {
-                    MemberCarRegisterRequest = memberCarRegisterRequest
+                    MemberCardRegisterRequest = memberCardRegisterRequest
                 });
  
                 return resp;
