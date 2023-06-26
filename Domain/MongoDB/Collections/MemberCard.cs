@@ -4,11 +4,12 @@ namespace Domain.MongoDB.Collections;
 public class MemberCard : Document
 {
     public string CardId { get; set; }
+    public string NickName { get; set; }
     public IdenCard IdenCard { get; set; }
     public DateTime RegisterDate { get; set; }
-    public int Level { get; set; }
-    public decimal ChipRollingTotal { get; set; }
-    public decimal ChipDepositTotal { get; set; }
-    public decimal ChipWithdrawTotal { get; set; }
-    public decimal GameWithdrawTotal { get; set; }
+    public int Level { get; set; } = 1;
+    public decimal ChipRollingTotal { get; set; } = 0;
+    public decimal ChipDepositTotal { get; set; }  = 0;
+    public decimal ChipWithdrawTotal { get; set; }  = 0;
+    public decimal GameWithdrawTotal { get; set; }  = 0;
 }

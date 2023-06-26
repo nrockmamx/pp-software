@@ -5,4 +5,5 @@ public class MemberCardGenerate : Document
 {
     public string CardId { get; set; }
     public bool Used { get; set; } = false;
+    public bool Print { get; set; } = false;
 }

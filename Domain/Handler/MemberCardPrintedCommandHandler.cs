@@ -15,47 +15,36 @@ using Serilog;
 
 namespace Domain.Handler;
 
-public class MemberCardGenCommandHandler : IRequestHandler<MemberCardGenCommand, ModelResponse>
+public class MemberCardPrintedCommandHandler : IRequestHandler<MemberCardPrintedCommand, ModelResponse>
 {
     private readonly IMongoRepository<MemberCardGenerate> _repository;
     private readonly IEnvironmentsConfig _environmentsConfig;
     private readonly IMemoryStore _memoryStore;
 
-    public MemberCardGenCommandHandler( IEnvironmentsConfig environmentsConfig, IMemoryStore memoryStore, IMongoRepository<MemberCardGenerate> repository)
+    public MemberCardPrintedCommandHandler( IEnvironmentsConfig environmentsConfig, IMemoryStore memoryStore, IMongoRepository<MemberCardGenerate> repository)
     {
         _environmentsConfig = environmentsConfig;
         _memoryStore = memoryStore;
         _repository = repository;
     }
 
-    public async Task<ModelResponse> Handle(MemberCardGenCommand request, CancellationToken cancellationToken)
+    public async Task<ModelResponse> Handle(MemberCardPrintedCommand request, CancellationToken cancellationToken)
     {
         ModelResponse modelResponse = new ModelResponse();
         try
         {
-            int i = 0;
-            List<string> cardId = new List<string>();
-            while (true)
+            var check = _repository.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
+                .Where(x => x.CardId == request.CardId)
+                .FirstOrDefault();
+
+            if (check == null && request.CardId.Length==10)
             {
-                Random r = new Random();
-                var key = $"{RandomString(3)}{r.Next(1000000,9999999)}";
-
-                var check = _repository.GetCollection().AsQueryable().Where(x => x.CardId == key).FirstOrDefault();
-                
-                if(check!=null)
-                    continue;
-                
-                if(cardId.Contains(key))
-                    continue;
-                cardId.Add(key);
-
-                i++;
-                if (i >= 8)
-                    break;
+                MemberCardGenerate memberCardGenerate = new MemberCardGenerate();
+                memberCardGenerate.CardId = request.CardId;
+                memberCardGenerate.Print = true;
+                modelResponse.Success();
             }
-
-            modelResponse.data = cardId;
-            modelResponse.Success();
+            
         }
         catch (Exception e)
         {
