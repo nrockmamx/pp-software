@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\.gitignore" />
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\.name" />
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\encodings.xml" />
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\indexLayout.xml" />
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\projectSettingsUpdater.xml" />
+      <Content Include="csharp\.idea\.idea.DemoApp\.idea\workspace.xml" />
+      <Content Include="csharp\.vs\DemoApp\v16\.suo" />
+      <Content Include="csharp\DemoApp.sln" />
+    </ItemGroup>
+
+</Project>
