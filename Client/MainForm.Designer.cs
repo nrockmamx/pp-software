@@ -34,8 +34,9 @@
             checkInToolStripMenuItem = new ToolStripMenuItem();
             historyToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
-            memberCardToolStripMenuItem = new ToolStripMenuItem();
+            memberCardRegisterToolStripMenuItem = new ToolStripMenuItem();
             panelContrainer = new Panel();
+            searchToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,47 +61,54 @@
             // 
             toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { checkInToolStripMenuItem, historyToolStripMenuItem });
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(206, 34);
+            toolStripMenuItem3.Size = new Size(270, 34);
             toolStripMenuItem3.Text = "Border Pass";
             // 
             // checkInToolStripMenuItem
             // 
             checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            checkInToolStripMenuItem.Size = new Size(176, 34);
+            checkInToolStripMenuItem.Size = new Size(270, 34);
             checkInToolStripMenuItem.Text = "CheckIn";
             checkInToolStripMenuItem.Click += checkInToolStripMenuItem_Click;
             // 
             // historyToolStripMenuItem
             // 
             historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            historyToolStripMenuItem.Size = new Size(176, 34);
+            historyToolStripMenuItem.Size = new Size(270, 34);
             historyToolStripMenuItem.Text = "History";
             // 
             // toolStripMenuItem2
             // 
-            toolStripMenuItem2.DropDownItems.AddRange(new ToolStripItem[] { memberCardToolStripMenuItem });
+            toolStripMenuItem2.DropDownItems.AddRange(new ToolStripItem[] { memberCardRegisterToolStripMenuItem, searchToolStripMenuItem });
             toolStripMenuItem2.Name = "toolStripMenuItem2";
             toolStripMenuItem2.Size = new Size(95, 29);
             toolStripMenuItem2.Text = "Member";
             // 
-            // memberCardToolStripMenuItem
+            // memberCardRegisterToolStripMenuItem
             // 
-            memberCardToolStripMenuItem.Name = "memberCardToolStripMenuItem";
-            memberCardToolStripMenuItem.Size = new Size(223, 34);
-            memberCardToolStripMenuItem.Text = "Member Card";
+            memberCardRegisterToolStripMenuItem.Name = "memberCardRegisterToolStripMenuItem";
+            memberCardRegisterToolStripMenuItem.Size = new Size(177, 34);
+            memberCardRegisterToolStripMenuItem.Text = "Register";
+            memberCardRegisterToolStripMenuItem.Click += memberCardRegisterToolStripMenuItem_Click;
             // 
             // panelContrainer
             // 
             panelContrainer.Location = new Point(12, 36);
             panelContrainer.Name = "panelContrainer";
-            panelContrainer.Size = new Size(1804, 1045);
+            panelContrainer.Size = new Size(1804, 1252);
             panelContrainer.TabIndex = 1;
+            // 
+            // searchToolStripMenuItem
+            // 
+            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            searchToolStripMenuItem.Size = new Size(177, 34);
+            searchToolStripMenuItem.Text = "Search";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1828, 1093);
+            ClientSize = new Size(1828, 1376);
             Controls.Add(panelContrainer);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -123,6 +131,7 @@
         private ToolStripMenuItem historyToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
         private Panel panelContrainer;
-        private ToolStripMenuItem memberCardToolStripMenuItem;
+        private ToolStripMenuItem memberCardRegisterToolStripMenuItem;
+        private ToolStripMenuItem searchToolStripMenuItem;
     }
 }

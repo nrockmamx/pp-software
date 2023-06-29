@@ -1,4 +1,5 @@
-﻿using Client.Promotion.BorderPass.CheckingVoucher;
+﻿using Client.Member.Register;
+using Client.Promotion.BorderPass.CheckingVoucher;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,8 @@ namespace Client
 {
     public partial class MainForm : Form
     {
+        private Checkin_Form checkIn = new Checkin_Form();
+        private Register register = new Register();
         public MainForm()
         {
             InitializeComponent();
@@ -20,7 +23,8 @@ namespace Client
 
         private void checkInToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var checkIn = new Checkin_Form()
+            Clear();
+            checkIn = new Checkin_Form()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false,
@@ -30,6 +34,27 @@ namespace Client
 
             this.panelContrainer.Controls.Add(checkIn);
             checkIn.Show();
+        }
+
+        private void memberCardRegisterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clear();
+            register = new Register()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false,
+                TopMost = true,
+                FormBorderStyle = FormBorderStyle.None
+            };
+
+            this.panelContrainer.Controls.Add(register);
+            register.Show();
+        }
+
+        private void Clear()
+        {
+            checkIn.Close();
+            register.Close();
         }
     }
 }

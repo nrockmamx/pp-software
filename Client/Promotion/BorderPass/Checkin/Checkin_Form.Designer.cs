@@ -119,7 +119,7 @@
             read_card_button.TabIndex = 1;
             read_card_button.Text = "Read Card";
             read_card_button.UseVisualStyleBackColor = true;
-            read_card_button.Click += get_voucher_button_Click;
+            read_card_button.Click += readcard_button_Click;
             // 
             // groupBox2
             // 
@@ -174,9 +174,9 @@
             // personal_pictureBox
             // 
             personal_pictureBox.BorderStyle = BorderStyle.Fixed3D;
-            personal_pictureBox.Location = new Point(1110, 291);
+            personal_pictureBox.Location = new Point(1131, 291);
             personal_pictureBox.Name = "personal_pictureBox";
-            personal_pictureBox.Size = new Size(275, 230);
+            personal_pictureBox.Size = new Size(216, 230);
             personal_pictureBox.TabIndex = 18;
             personal_pictureBox.TabStop = false;
             // 
@@ -350,6 +350,7 @@
             Controls.Add(groupBox1);
             Name = "Checkin_Form";
             Text = "CheckingVoucher";
+            Load += LoadFrom;
             groupBox1.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
