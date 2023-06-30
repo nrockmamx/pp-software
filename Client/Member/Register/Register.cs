@@ -108,7 +108,7 @@ namespace Client.Member.Register
         {
             if (string.IsNullOrEmpty(tel_textBox.Text) || tel_textBox.Text.Length < 10)
             {
-                MessageBox.Show("Please input tel with number only", "Error");
+                MessageBox.Show("Please input phonenumber with number only", "Error");
                 return;
             }
 
@@ -153,9 +153,24 @@ namespace Client.Member.Register
 
             if (!resp.GetStatus())
             {
-                MessageBox.Show("Invalid Username or Password");
+                switch(resp.data)
+                {
+                    case "NICKNAME_ERROR":
+                        MessageBox.Show("Please input Nickname", "Error");
+                        break;
+                    case "TEL_ERROR":
+                        MessageBox.Show("Please input phonenumber with number only", "Error");
+                        break;
+                    case "TEL_USED":
+                        MessageBox.Show("Phonenumber already used", "Error");
+                        break;
+                }
+
                 return;
             }
+
+            MessageBox.Show("Register Success", "Success");
+            printcard_button.Enabled = true;
         }
     }
 }
