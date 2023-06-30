@@ -61,7 +61,22 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
             }
             
             MemberCard memberCard = new MemberCard();
-            memberCard.CardId = request.MemberCardRegisterRequest.CardId;
+
+            Random r = new Random();
+            var key = $"{RandomString(3)}{r.Next(1000000, 9999999)}";
+            while (true)
+            {
+                key = $"{RandomString(3)}{r.Next(1000000, 9999999)}";
+
+                var check = _repositoryMember.GetCollection().AsQueryable().Where(x => x.CardId == key).FirstOrDefault();
+
+                if (check != null)
+                    continue;
+
+                break;
+            }
+
+            memberCard.CardId = key;
             memberCard.NickName = request.MemberCardRegisterRequest.NickName;
             memberCard.Tel = request.MemberCardRegisterRequest.Tel;
 
@@ -84,6 +99,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
             updates.Add(update.Set(x => x.Used, true));
             await _repositoryMemberGen.UpdateOneAsync(x => x.CardId == request.MemberCardRegisterRequest.CardId, update.Combine(updates));
             await _repositoryMember.InsertOneAsync(memberCard);
+            modelResponse.data = key;
             modelResponse.Success();
 
         }
