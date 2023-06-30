@@ -5,6 +5,7 @@ public class MemberCard : Document
 {
     public string CardId { get; set; }
     public string NickName { get; set; }
+    public string Tel { get; set; }
     public IdenCard IdenCard { get; set; }
     public DateTime RegisterDate { get; set; }
     public int Level { get; set; } = 1;

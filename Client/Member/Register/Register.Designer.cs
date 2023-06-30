@@ -30,8 +30,10 @@
         {
             printcard_button = new Button();
             groupBox1 = new GroupBox();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
+            from_comboBox = new ComboBox();
+            label12 = new Label();
+            member_card_back_pictureBox = new PictureBox();
+            member_card_front_pictureBox = new PictureBox();
             groupBox2 = new GroupBox();
             readcard_button = new Button();
             personal_pictureBox = new PictureBox();
@@ -61,8 +63,8 @@
             label1 = new Label();
             register_button = new Button();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)member_card_back_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)member_card_front_pictureBox).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)personal_pictureBox).BeginInit();
             groupBox4.SuspendLayout();
@@ -73,7 +75,7 @@
             // 
             printcard_button.Enabled = false;
             printcard_button.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            printcard_button.Location = new Point(591, 971);
+            printcard_button.Location = new Point(460, 971);
             printcard_button.Name = "printcard_button";
             printcard_button.Size = new Size(411, 158);
             printcard_button.TabIndex = 0;
@@ -83,8 +85,10 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(pictureBox2);
-            groupBox1.Controls.Add(pictureBox1);
+            groupBox1.Controls.Add(from_comboBox);
+            groupBox1.Controls.Add(label12);
+            groupBox1.Controls.Add(member_card_back_pictureBox);
+            groupBox1.Controls.Add(member_card_front_pictureBox);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(tel_textBox);
             groupBox1.Controls.Add(label2);
@@ -97,21 +101,40 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Personal Detail";
             // 
-            // pictureBox2
+            // from_comboBox
             // 
-            pictureBox2.Location = new Point(563, 663);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(488, 247);
-            pictureBox2.TabIndex = 6;
-            pictureBox2.TabStop = false;
+            from_comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            from_comboBox.FormattingEnabled = true;
+            from_comboBox.Items.AddRange(new object[] { "Walk In", "Junket", "Tour" });
+            from_comboBox.Location = new Point(646, 42);
+            from_comboBox.Name = "from_comboBox";
+            from_comboBox.Size = new Size(217, 33);
+            from_comboBox.TabIndex = 8;
             // 
-            // pictureBox1
+            // label12
             // 
-            pictureBox1.Location = new Point(37, 663);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(488, 247);
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
+            label12.AutoSize = true;
+            label12.Location = new Point(579, 51);
+            label12.Name = "label12";
+            label12.Size = new Size(58, 25);
+            label12.TabIndex = 7;
+            label12.Text = "From:";
+            // 
+            // member_card_back_pictureBox
+            // 
+            member_card_back_pictureBox.Location = new Point(563, 663);
+            member_card_back_pictureBox.Name = "member_card_back_pictureBox";
+            member_card_back_pictureBox.Size = new Size(488, 247);
+            member_card_back_pictureBox.TabIndex = 6;
+            member_card_back_pictureBox.TabStop = false;
+            // 
+            // member_card_front_pictureBox
+            // 
+            member_card_front_pictureBox.Location = new Point(37, 663);
+            member_card_front_pictureBox.Name = "member_card_front_pictureBox";
+            member_card_front_pictureBox.Size = new Size(488, 247);
+            member_card_front_pictureBox.TabIndex = 5;
+            member_card_front_pictureBox.TabStop = false;
             // 
             // groupBox2
             // 
@@ -371,7 +394,7 @@
             // register_button
             // 
             register_button.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            register_button.Location = new Point(91, 971);
+            register_button.Location = new Point(28, 971);
             register_button.Name = "register_button";
             register_button.Size = new Size(411, 158);
             register_button.TabIndex = 5;
@@ -389,10 +412,11 @@
             Controls.Add(groupBox1);
             Name = "Register";
             Text = "Register";
+            Load += OnLoad;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)member_card_back_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)member_card_front_pictureBox).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)personal_pictureBox).EndInit();
@@ -435,7 +459,9 @@
         private Button register_button;
         private Button readcard_button;
         private PictureBox personal_pictureBox;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
+        private PictureBox member_card_back_pictureBox;
+        private PictureBox member_card_front_pictureBox;
+        private ComboBox from_comboBox;
+        private Label label12;
     }
 }
