@@ -45,8 +45,7 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
                 check.Tel = request.PromotionCheckInRequest.Tel;
                 check.NameTh = request.PromotionCheckInRequest.NameTh;
                 check.NameEng = request.PromotionCheckInRequest.NameEng;
-                check.AddressEng = request.PromotionCheckInRequest.AddressEng;
-                check.AddressTh = request.PromotionCheckInRequest.AddressTh;
+                check.Address = request.PromotionCheckInRequest.AddressEng;
                 check.PassportImage = request.PromotionCheckInRequest.PassportImage;
                 check.PersonalImage = request.PromotionCheckInRequest.PersonalImage;
                 check.DateOfBirth = request.PromotionCheckInRequest.DateOfBirth;

@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain.Model;
+using Domain.Model.Request;
+using Emgu.CV.Reg;
 using RestSharp;
 using static Client.EVOSDK1Enums;
 using static Client.EVOSDK1Wrapper;
@@ -32,6 +34,19 @@ namespace Client.Member.Register
             Data data = new Data("Evolis Primacy");
             p.Print(data, "", "");
 
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
+            Size size = new Size(488, 247);
+            member_card_back_pictureBox.Image = GlobalFunc.resizeImage(Image.FromFile("Resources/backSide.BMP"), size);
+            member_card_front_pictureBox.Image = GlobalFunc.resizeImage(Image.FromFile("Resources/frontSilverNoNumber.bmp"), size);
+            from_comboBox.SelectedIndex = 0;
+
+#if DEBUG
+            nickname_textBox.Text = "sdsadasdasdasd";
+            tel_textBox.Text = "23434343434";
+#endif
         }
 
         private async void readcard_button_Click(object sender, EventArgs e)
@@ -72,9 +87,9 @@ namespace Client.Member.Register
                     ssid_textBox.Text = card.nat_id;
                     is_textBox.Text = card.issuer;
                     ed_textBox.Text = card.issue_expire;
-                    var bitMap = MasterCache.Base64StringToBitmap(card.photo);
-                    Size size = new Size(275, 230);
-                    personal_pictureBox.Image = resizeImage((Image)bitMap, size);
+                    var bitMap = GlobalFunc.Base64StringToBitmap(card.photo);
+                    Size size = new Size(213, 229);
+                    personal_pictureBox.Image = GlobalFunc.resizeImage((Image)bitMap, size);
                 }
                 else
                 {
@@ -89,47 +104,56 @@ namespace Client.Member.Register
         }
 
 
-        private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
+        private async void register_button_Click(object sender, EventArgs e)
         {
-            //Get the image current width  
-            int sourceWidth = imgToResize.Width;
-            //Get the image current height  
-            int sourceHeight = imgToResize.Height;
-            float nPercent = 0;
-            float nPercentW = 0;
-            float nPercentH = 0;
-            //Calulate  width with new desired size  
-            nPercentW = ((float)size.Width / (float)sourceWidth);
-            //Calculate height with new desired size  
-            nPercentH = ((float)size.Height / (float)sourceHeight);
-            if (nPercentH < nPercentW)
-                nPercent = nPercentH;
-            else
-                nPercent = nPercentW;
-            //New Width  
-            int destWidth = (int)(sourceWidth * nPercent);
-            //New Height  
-            int destHeight = (int)(sourceHeight * nPercent);
-            Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((System.Drawing.Image)b);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            // Draw image with new width and height  
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-            g.Dispose();
-            return (System.Drawing.Image)b;
-        }
-
-        private void register_button_Click(object sender, EventArgs e)
-        {
-            if(string.IsNullOrEmpty(tel_textBox.Text))
+            if (string.IsNullOrEmpty(tel_textBox.Text) || tel_textBox.Text.Length < 10)
             {
-                MessageBox.Show("Please input tel with number only","Error");
+                MessageBox.Show("Please input tel with number only", "Error");
                 return;
             }
+
 
             if (string.IsNullOrEmpty(nickname_textBox.Text))
             {
                 MessageBox.Show("Please input Nickname", "Error");
+                return;
+            }
+
+
+            var client = new RestClient(MasterCache.ApiUrl);
+            var request = new RestRequest($"/v1/member/register");
+            
+            MemberCardRegisterRequest memberCardRegisterRequest = new MemberCardRegisterRequest();
+            memberCardRegisterRequest.CardId = ssid_textBox.Text;
+            memberCardRegisterRequest.NickName = nickname_textBox.Text;
+            memberCardRegisterRequest.Tel = tel_textBox.Text;
+            
+            memberCardRegisterRequest.CardIden = new MemberCardRegisterRequest.CardIdenDetail();
+            memberCardRegisterRequest.CardIden.Address = addressTh_textBox.Text;
+            memberCardRegisterRequest.CardIden.NameTh = nameTh_textBox.Text;
+            memberCardRegisterRequest.CardIden.NameEng = nameEng_textBox.Text;
+            
+            if(!string.IsNullOrEmpty(dob_textBox.Text))
+                memberCardRegisterRequest.CardIden.DateOfBirth = DateTime.Parse(dob_textBox.Text);
+
+            memberCardRegisterRequest.Tel = tel_textBox.Text;
+            memberCardRegisterRequest.From = from_comboBox.SelectedItem.ToString();
+            memberCardRegisterRequest.CardIden.Ssid = ssid_textBox.Text;
+
+            request.AddBody(memberCardRegisterRequest);
+            var res = await client.ExecutePostAsync(request);
+
+            if (res.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show("Internal Error");
+                return;
+            }
+
+            ModelResponse resp = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelResponse>(res.Content.ToString());
+
+            if (!resp.GetStatus())
+            {
+                MessageBox.Show("Invalid Username or Password");
                 return;
             }
         }

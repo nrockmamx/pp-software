@@ -93,6 +93,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
             MemberCard memberCard = new MemberCard();
             memberCard.CardId = request.MemberCardRegisterRequest.CardId;
             memberCard.NickName = request.MemberCardRegisterRequest.NickName;
+            memberCard.Tel = request.MemberCardRegisterRequest.Tel;
 
             if (request.MemberCardRegisterRequest.CardIden != null)
             {
@@ -100,8 +101,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
                 memberCard.IdenCard.Ssid = request.MemberCardRegisterRequest.CardIden.Ssid;
                 memberCard.IdenCard.Tel = request.MemberCardRegisterRequest.Tel;
                 memberCard.RegisterDate = DateTime.Now;
-                memberCard.IdenCard.AddressEng = request.MemberCardRegisterRequest.CardIden.AddressEng;
-                memberCard.IdenCard.AddressTh = request.MemberCardRegisterRequest.CardIden.AddressTh;
+                memberCard.IdenCard.Address = request.MemberCardRegisterRequest.CardIden.Address;
                 memberCard.IdenCard.NameEng = request.MemberCardRegisterRequest.CardIden.NameEng;
                 memberCard.IdenCard.NameTh = request.MemberCardRegisterRequest.CardIden.NameTh;
                 memberCard.IdenCard.PassportImage = request.MemberCardRegisterRequest.CardIden.PassportImage;

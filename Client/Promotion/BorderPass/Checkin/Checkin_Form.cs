@@ -120,7 +120,7 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
                     ssid_textBox.Text = card.nat_id;
                     is_textBox.Text = card.issuer;
                     ed_textBox.Text = card.issue_expire;
-                    var bitMap = MasterCache.Base64StringToBitmap(card.photo);
+                    var bitMap = GlobalFunc.Base64StringToBitmap(card.photo);
 
                     Size size = new Size(275, 230);
                     personal_pictureBox.Image = resizeImage((Image)bitMap, size);
