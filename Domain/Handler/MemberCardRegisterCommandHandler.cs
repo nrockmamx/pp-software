@@ -36,37 +36,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
         ModelResponse modelResponse = new ModelResponse();
         try
         {
-            if (request.MemberCardRegisterRequest.CardId.Length < 10)
-            {
-                modelResponse.data = "CARDID_ERROR";
-                return modelResponse;
-            }
 
-            var check = _repositoryMemberGen.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
-                .AsQueryable().Where(x => x.CardId == request.MemberCardRegisterRequest.CardId)
-                .FirstOrDefault();
-
-            if (check == null)
-            {
-                modelResponse.data = "CANT_FIND_CARDID";
-                return modelResponse;
-            }
-
-            if (check.Used)
-            {
-                modelResponse.data = "CARDID_USED";
-                return modelResponse;
-            }
-
-            var checkMember = _repositoryMember.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
-                .AsQueryable().Where(x => x.CardId == request.MemberCardRegisterRequest.CardId)
-                .FirstOrDefault();
-
-            if (checkMember != null)
-            {
-                modelResponse.data = "CARDID_USED";
-                return modelResponse;
-            }
             
             if (string.IsNullOrEmpty(request.MemberCardRegisterRequest.NickName))
             {
@@ -84,7 +54,7 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
                 .AsQueryable().Where(x => x.IdenCard.Tel == request.MemberCardRegisterRequest.Tel)
                 .FirstOrDefault();
 
-            if (checkMember != null)
+            if (checkTel != null)
             {
                 modelResponse.data = "TEL_USED";
                 return modelResponse;
