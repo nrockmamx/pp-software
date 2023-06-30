@@ -73,7 +73,23 @@ public class MemberCardRegisterCommandHandler : IRequestHandler<MemberCardRegist
                 modelResponse.data = "NICKNAME_ERROR";
                 return modelResponse;
             }
+            
+            if (string.IsNullOrEmpty(request.MemberCardRegisterRequest.Tel) && request.MemberCardRegisterRequest.Tel.Length<10)
+            {
+                modelResponse.data = "TEL_ERROR";
+                return modelResponse;
+            }
 
+            var checkTel = _repositoryMember.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
+                .AsQueryable().Where(x => x.IdenCard.Tel == request.MemberCardRegisterRequest.Tel)
+                .FirstOrDefault();
+
+            if (checkMember != null)
+            {
+                modelResponse.data = "TEL_USED";
+                return modelResponse;
+            }
+            
             MemberCard memberCard = new MemberCard();
             memberCard.CardId = request.MemberCardRegisterRequest.CardId;
             memberCard.NickName = request.MemberCardRegisterRequest.NickName;
