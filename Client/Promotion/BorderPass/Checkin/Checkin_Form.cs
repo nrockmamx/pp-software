@@ -14,6 +14,8 @@ using AForge.Video.DirectShow;
 using System.Drawing.Drawing2D;
 using RestSharp;
 using Domain.Model;
+using System.Security.Policy;
+using Emgu.Util;
 
 namespace Client.Promotion.BorderPass.CheckingVoucher
 {
@@ -21,23 +23,66 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
     {
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfoCollection;
+
         public Checkin_Form()
         {
             InitializeComponent();
-            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            videoCapture = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
-            videoCapture.NewFrame += captureVideo;
-            videoCapture.Start();
 
         }
 
         private void captureVideo(object sender, NewFrameEventArgs e)
         {
             Size size = new Size(382, 335);
-            border_pass_pictureBox.Image = resizeImage((Bitmap)e.Frame.Clone(), size);
+            var video = resizeImage((Bitmap)e.Frame.Clone(), size);
+            border_pass_pictureBox.Image = video;
+
         }
 
         private async void get_voucher_button_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
+        {
+            //Get the image current width  
+            int sourceWidth = imgToResize.Width;
+            //Get the image current height  
+            int sourceHeight = imgToResize.Height;
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+            //Calulate  width with new desired size  
+            nPercentW = ((float)size.Width / (float)sourceWidth);
+            //Calculate height with new desired size  
+            nPercentH = ((float)size.Height / (float)sourceHeight);
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+            //New Width  
+            int destWidth = (int)(sourceWidth * nPercent);
+            //New Height  
+            int destHeight = (int)(sourceHeight * nPercent);
+            Bitmap b = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage((System.Drawing.Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            // Draw image with new width and height  
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
+            return (System.Drawing.Image)b;
+        }
+
+        private void LoadFrom(object sender, EventArgs e)
+        {
+            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            videoCapture = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            videoCapture.NewFrame += new NewFrameEventHandler(captureVideo);
+            //videoCapture.DesiredFrameRate = 15;
+            videoCapture.Start();
+        }
+
+        private async void readcard_button_Click(object sender, EventArgs e)
         {
             try
             {
@@ -76,7 +121,9 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
                     is_textBox.Text = card.issuer;
                     ed_textBox.Text = card.issue_expire;
                     var bitMap = MasterCache.Base64StringToBitmap(card.photo);
-                    personal_pictureBox.Image = (Image)bitMap;
+
+                    Size size = new Size(275, 230);
+                    personal_pictureBox.Image = resizeImage((Image)bitMap, size);
                     checkin_button.Enabled = true;
                 }
                 else
@@ -89,36 +136,6 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
             {
                 MessageBox.Show("Please check card", "Error");
             }
-        }
-
-        private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
-        {
-            //Get the image current width  
-            int sourceWidth = imgToResize.Width;
-            //Get the image current height  
-            int sourceHeight = imgToResize.Height;
-            float nPercent = 0;
-            float nPercentW = 0;
-            float nPercentH = 0;
-            //Calulate  width with new desired size  
-            nPercentW = ((float)size.Width / (float)sourceWidth);
-            //Calculate height with new desired size  
-            nPercentH = ((float)size.Height / (float)sourceHeight);
-            if (nPercentH < nPercentW)
-                nPercent = nPercentH;
-            else
-                nPercent = nPercentW;
-            //New Width  
-            int destWidth = (int)(sourceWidth * nPercent);
-            //New Height  
-            int destHeight = (int)(sourceHeight * nPercent);
-            Bitmap b = new Bitmap(destWidth, destHeight);
-            Graphics g = Graphics.FromImage((System.Drawing.Image)b);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            // Draw image with new width and height  
-            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-            g.Dispose();
-            return (System.Drawing.Image)b;
         }
     }
 }
