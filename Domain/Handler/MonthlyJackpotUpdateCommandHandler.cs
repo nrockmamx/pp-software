@@ -47,7 +47,6 @@ public class MonthlyJackpotUpdateCommandHandler : IRequestHandler<MonthlyJackpot
                 check.Number6 = check.Total * 2 / 100;
                 check.Number7to20 = Convert.ToInt64(check.Total * 1.5 / 100);
                 check.Number21to29 = Convert.ToInt64(check.Total * 1 / 100);
-                await _repository.InsertOneAsync(check);
                 
                 var update = Builders<MonthlyJackpot>.Update;
                 var updates = new List<UpdateDefinition<MonthlyJackpot>>();
