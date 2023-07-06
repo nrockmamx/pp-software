@@ -10,5 +10,8 @@ namespace Client
     {
         public static string Token { get; set; }
         public static string ApiUrl { get; set; }
+        public static string PersonalBitMap { get; set; }
+
+        public static string PassportBitMap { get; set; }
     }
 }

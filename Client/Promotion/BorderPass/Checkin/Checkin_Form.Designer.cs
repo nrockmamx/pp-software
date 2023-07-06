@@ -32,63 +32,54 @@
             checkin_button = new Button();
             groupBox5 = new GroupBox();
             dataGridView1 = new DataGridView();
-            read_card_button = new Button();
             groupBox2 = new GroupBox();
-            addressTh_textBox = new TextBox();
-            label3 = new Label();
+            mrtds_textBox = new TextBox();
+            label1 = new Label();
+            passport_id_textBox = new TextBox();
+            label5 = new Label();
+            nameEng_textBox = new TextBox();
+            label6 = new Label();
             border_pass_pictureBox = new PictureBox();
-            personal_pictureBox = new PictureBox();
+            passport_pictureBox = new PictureBox();
             ed_textBox = new TextBox();
             label11 = new Label();
             ssid_textBox = new TextBox();
             label10 = new Label();
-            is_textBox = new TextBox();
-            label9 = new Label();
             dob_textBox = new TextBox();
             label8 = new Label();
-            groupBox4 = new GroupBox();
-            textBox5 = new TextBox();
-            nameEng_textBox = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
-            groupBox3 = new GroupBox();
-            textBox2 = new TextBox();
-            nameTh_textBox = new TextBox();
+            status_label = new Label();
             label2 = new Label();
-            label1 = new Label();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)personal_pictureBox).BeginInit();
-            groupBox4.SuspendLayout();
-            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)passport_pictureBox).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(checkin_button);
             groupBox1.Controls.Add(groupBox5);
-            groupBox1.Controls.Add(read_card_button);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Location = new Point(29, 19);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1485, 989);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Border Pass CheckIn ";
+            groupBox1.Text = "Passport CheckIn ";
             // 
             // checkin_button
             // 
             checkin_button.Enabled = false;
             checkin_button.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
-            checkin_button.Location = new Point(1052, 702);
+            checkin_button.Location = new Point(1052, 585);
             checkin_button.Name = "checkin_button";
-            checkin_button.Size = new Size(382, 93);
+            checkin_button.Size = new Size(382, 387);
             checkin_button.TabIndex = 3;
             checkin_button.Text = "Check In";
             checkin_button.UseVisualStyleBackColor = true;
+            checkin_button.Click += checkin_button_Click;
             // 
             // groupBox5
             // 
@@ -110,33 +101,24 @@
             dataGridView1.Size = new Size(981, 289);
             dataGridView1.TabIndex = 0;
             // 
-            // read_card_button
-            // 
-            read_card_button.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
-            read_card_button.Location = new Point(1052, 584);
-            read_card_button.Name = "read_card_button";
-            read_card_button.Size = new Size(382, 93);
-            read_card_button.TabIndex = 1;
-            read_card_button.Text = "Read Card";
-            read_card_button.UseVisualStyleBackColor = true;
-            read_card_button.Click += readcard_button_Click;
-            // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(addressTh_textBox);
-            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(status_label);
+            groupBox2.Controls.Add(mrtds_textBox);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(passport_id_textBox);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(nameEng_textBox);
+            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(border_pass_pictureBox);
-            groupBox2.Controls.Add(personal_pictureBox);
+            groupBox2.Controls.Add(passport_pictureBox);
             groupBox2.Controls.Add(ed_textBox);
             groupBox2.Controls.Add(label11);
             groupBox2.Controls.Add(ssid_textBox);
             groupBox2.Controls.Add(label10);
-            groupBox2.Controls.Add(is_textBox);
-            groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(dob_textBox);
             groupBox2.Controls.Add(label8);
-            groupBox2.Controls.Add(groupBox4);
-            groupBox2.Controls.Add(groupBox3);
             groupBox2.Location = new Point(22, 30);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(1426, 536);
@@ -144,45 +126,79 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Detail";
             // 
-            // addressTh_textBox
+            // mrtds_textBox
             // 
-            addressTh_textBox.Location = new Point(173, 153);
-            addressTh_textBox.Multiline = true;
-            addressTh_textBox.Name = "addressTh_textBox";
-            addressTh_textBox.ReadOnly = true;
-            addressTh_textBox.Size = new Size(341, 183);
-            addressTh_textBox.TabIndex = 5;
+            mrtds_textBox.Location = new Point(125, 215);
+            mrtds_textBox.Multiline = true;
+            mrtds_textBox.Name = "mrtds_textBox";
+            mrtds_textBox.ReadOnly = true;
+            mrtds_textBox.Size = new Size(339, 261);
+            mrtds_textBox.TabIndex = 22;
             // 
-            // label3
+            // label1
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(86, 153);
-            label3.Name = "label3";
-            label3.Size = new Size(81, 25);
-            label3.TabIndex = 4;
-            label3.Text = "Address:";
+            label1.AutoSize = true;
+            label1.Location = new Point(45, 215);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 25);
+            label1.TabIndex = 21;
+            label1.Text = "MRTDS:";
+            // 
+            // passport_id_textBox
+            // 
+            passport_id_textBox.Location = new Point(125, 67);
+            passport_id_textBox.Name = "passport_id_textBox";
+            passport_id_textBox.ReadOnly = true;
+            passport_id_textBox.Size = new Size(339, 31);
+            passport_id_textBox.TabIndex = 3;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 70);
+            label5.Name = "label5";
+            label5.Size = new Size(107, 25);
+            label5.TabIndex = 1;
+            label5.Text = "Passport ID:";
+            // 
+            // nameEng_textBox
+            // 
+            nameEng_textBox.Location = new Point(125, 30);
+            nameEng_textBox.Name = "nameEng_textBox";
+            nameEng_textBox.ReadOnly = true;
+            nameEng_textBox.Size = new Size(339, 31);
+            nameEng_textBox.TabIndex = 2;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(56, 33);
+            label6.Name = "label6";
+            label6.Size = new Size(63, 25);
+            label6.TabIndex = 0;
+            label6.Text = "Name:";
             // 
             // border_pass_pictureBox
             // 
             border_pass_pictureBox.BorderStyle = BorderStyle.Fixed3D;
-            border_pass_pictureBox.Location = new Point(1076, 18);
+            border_pass_pictureBox.Location = new Point(483, 33);
             border_pass_pictureBox.Name = "border_pass_pictureBox";
-            border_pass_pictureBox.Size = new Size(322, 267);
+            border_pass_pictureBox.Size = new Size(426, 225);
             border_pass_pictureBox.TabIndex = 19;
             border_pass_pictureBox.TabStop = false;
             // 
-            // personal_pictureBox
+            // passport_pictureBox
             // 
-            personal_pictureBox.BorderStyle = BorderStyle.Fixed3D;
-            personal_pictureBox.Location = new Point(1131, 291);
-            personal_pictureBox.Name = "personal_pictureBox";
-            personal_pictureBox.Size = new Size(216, 230);
-            personal_pictureBox.TabIndex = 18;
-            personal_pictureBox.TabStop = false;
+            passport_pictureBox.BorderStyle = BorderStyle.Fixed3D;
+            passport_pictureBox.Location = new Point(924, 33);
+            passport_pictureBox.Name = "passport_pictureBox";
+            passport_pictureBox.Size = new Size(488, 225);
+            passport_pictureBox.TabIndex = 18;
+            passport_pictureBox.TabStop = false;
             // 
             // ed_textBox
             // 
-            ed_textBox.Location = new Point(687, 152);
+            ed_textBox.Location = new Point(125, 141);
             ed_textBox.Name = "ed_textBox";
             ed_textBox.ReadOnly = true;
             ed_textBox.Size = new Size(339, 31);
@@ -191,7 +207,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(578, 154);
+            label11.Location = new Point(16, 143);
             label11.Name = "label11";
             label11.Size = new Size(105, 25);
             label11.TabIndex = 15;
@@ -199,7 +215,7 @@
             // 
             // ssid_textBox
             // 
-            ssid_textBox.Location = new Point(687, 189);
+            ssid_textBox.Location = new Point(125, 178);
             ssid_textBox.Name = "ssid_textBox";
             ssid_textBox.ReadOnly = true;
             ssid_textBox.Size = new Size(339, 31);
@@ -208,32 +224,15 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(607, 192);
+            label10.Location = new Point(10, 181);
             label10.Name = "label10";
-            label10.Size = new Size(74, 25);
+            label10.Size = new Size(111, 25);
             label10.TabIndex = 13;
-            label10.Text = "Card Id:";
-            // 
-            // is_textBox
-            // 
-            is_textBox.Location = new Point(687, 266);
-            is_textBox.Name = "is_textBox";
-            is_textBox.ReadOnly = true;
-            is_textBox.Size = new Size(339, 31);
-            is_textBox.TabIndex = 10;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(602, 272);
-            label9.Name = "label9";
-            label9.Size = new Size(79, 25);
-            label9.TabIndex = 11;
-            label9.Text = "Issue At:";
+            label10.Text = "Personal No:";
             // 
             // dob_textBox
             // 
-            dob_textBox.Location = new Point(687, 228);
+            dob_textBox.Location = new Point(125, 104);
             dob_textBox.Name = "dob_textBox";
             dob_textBox.ReadOnly = true;
             dob_textBox.Size = new Size(339, 31);
@@ -242,105 +241,33 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(564, 234);
+            label8.Location = new Point(2, 110);
             label8.Name = "label8";
             label8.Size = new Size(117, 25);
             label8.TabIndex = 9;
             label8.Text = "Date of birth:";
             // 
-            // groupBox4
+            // status_label
             // 
-            groupBox4.Controls.Add(textBox5);
-            groupBox4.Controls.Add(nameEng_textBox);
-            groupBox4.Controls.Add(label5);
-            groupBox4.Controls.Add(label6);
-            groupBox4.Location = new Point(539, 30);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(493, 116);
-            groupBox4.TabIndex = 6;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "English";
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(148, 75);
-            textBox5.Name = "textBox5";
-            textBox5.ReadOnly = true;
-            textBox5.Size = new Size(339, 31);
-            textBox5.TabIndex = 3;
-            // 
-            // nameEng_textBox
-            // 
-            nameEng_textBox.Location = new Point(148, 39);
-            nameEng_textBox.Name = "nameEng_textBox";
-            nameEng_textBox.ReadOnly = true;
-            nameEng_textBox.Size = new Size(339, 31);
-            nameEng_textBox.TabIndex = 2;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(19, 78);
-            label5.Name = "label5";
-            label5.Size = new Size(123, 25);
-            label5.TabIndex = 1;
-            label5.Text = "Middel Name:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(77, 42);
-            label6.Name = "label6";
-            label6.Size = new Size(63, 25);
-            label6.TabIndex = 0;
-            label6.Text = "Name:";
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(textBox2);
-            groupBox3.Controls.Add(nameTh_textBox);
-            groupBox3.Controls.Add(label2);
-            groupBox3.Controls.Add(label1);
-            groupBox3.Location = new Point(25, 30);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(493, 116);
-            groupBox3.TabIndex = 0;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Thai";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(148, 75);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(339, 31);
-            textBox2.TabIndex = 3;
-            // 
-            // nameTh_textBox
-            // 
-            nameTh_textBox.Location = new Point(148, 39);
-            nameTh_textBox.Name = "nameTh_textBox";
-            nameTh_textBox.ReadOnly = true;
-            nameTh_textBox.Size = new Size(339, 31);
-            nameTh_textBox.TabIndex = 2;
+            status_label.AutoSize = true;
+            status_label.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            status_label.Location = new Point(717, 341);
+            status_label.Name = "status_label";
+            status_label.Size = new Size(670, 96);
+            status_label.TabIndex = 23;
+            status_label.Text = "Wait Insert Passport";
+            status_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(19, 78);
+            label2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(483, 341);
             label2.Name = "label2";
-            label2.Size = new Size(123, 25);
-            label2.TabIndex = 1;
-            label2.Text = "Middel Name:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(79, 42);
-            label1.Name = "label1";
-            label1.Size = new Size(63, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Name:";
+            label2.Size = new Size(249, 96);
+            label2.TabIndex = 24;
+            label2.Text = "Status:";
+            label2.TextAlign = ContentAlignment.TopCenter;
             // 
             // Checkin_Form
             // 
@@ -357,32 +284,19 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)personal_pictureBox).EndInit();
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)passport_pictureBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox1;
-        private Button read_card_button;
         private GroupBox groupBox2;
-        private GroupBox groupBox3;
-        private TextBox nameTh_textBox;
-        private Label label2;
-        private Label label1;
-        private TextBox addressTh_textBox;
-        private Label label3;
-        private TextBox textBox2;
-        private GroupBox groupBox4;
-        private TextBox textBox5;
+        private TextBox passport_id_textBox;
         private TextBox nameEng_textBox;
         private Label label5;
         private Label label6;
-        private PictureBox personal_pictureBox;
+        private PictureBox passport_pictureBox;
         private TextBox ed_textBox;
         private Label label11;
         private TextBox ssid_textBox;
@@ -395,5 +309,9 @@
         private DataGridView dataGridView1;
         private PictureBox border_pass_pictureBox;
         private Button checkin_button;
+        private TextBox mrtds_textBox;
+        private Label label1;
+        private Label status_label;
+        private Label label2;
     }
 }

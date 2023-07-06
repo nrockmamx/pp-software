@@ -35,8 +35,8 @@
             historyToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             memberCardRegisterToolStripMenuItem = new ToolStripMenuItem();
-            panelContrainer = new Panel();
             searchToolStripMenuItem = new ToolStripMenuItem();
+            panelContrainer = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,7 +62,7 @@
             toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { checkInToolStripMenuItem, historyToolStripMenuItem });
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.Size = new Size(270, 34);
-            toolStripMenuItem3.Text = "Border Pass";
+            toolStripMenuItem3.Text = "Passport";
             // 
             // checkInToolStripMenuItem
             // 
@@ -91,18 +91,18 @@
             memberCardRegisterToolStripMenuItem.Text = "Register";
             memberCardRegisterToolStripMenuItem.Click += memberCardRegisterToolStripMenuItem_Click;
             // 
+            // searchToolStripMenuItem
+            // 
+            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            searchToolStripMenuItem.Size = new Size(177, 34);
+            searchToolStripMenuItem.Text = "Search";
+            // 
             // panelContrainer
             // 
             panelContrainer.Location = new Point(12, 36);
             panelContrainer.Name = "panelContrainer";
             panelContrainer.Size = new Size(1804, 1252);
             panelContrainer.TabIndex = 1;
-            // 
-            // searchToolStripMenuItem
-            // 
-            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            searchToolStripMenuItem.Size = new Size(177, 34);
-            searchToolStripMenuItem.Text = "Search";
             // 
             // MainForm
             // 
@@ -116,6 +116,7 @@
             Name = "MainForm";
             Text = "Palace Casino V1.0";
             WindowState = FormWindowState.Maximized;
+            Load += OnLoad;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

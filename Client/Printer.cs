@@ -14,7 +14,7 @@ namespace Client
     {
         
 
-        private void ChoosePrinter(ref Data d, string frontFile, string backFile)
+        public void ChoosePrinter(ref Data d, string frontFile, string backFile)
         {
             IntPtr handle = IntPtr.Zero;
             handle = EVOSDK1Wrapper.EPSDK_GAPI_CreateCommunicationSettings(EVOSDK1Enums.EPSDK_ConnectionType.EPSDK_CT_Pipe, ".", "ESPF2Server00");
@@ -61,7 +61,7 @@ namespace Client
             if (PrinterOpen(d.PrinterName, ref comHandle, ref printerHandle))
             {
 
-                string printingParams = "GRibbonType=RC_YMCKO;Duplex=HORIZONTAL;GDuplexType=DUPLEX_CC;FOverlayManagement=FULLVARNISH;BOverlayManagement=FULLVARNISH;FBlackManagement=ALLBLACKPOINT;BBlackManagement=ALLBLACKPOINT;BOverlayContrast=VAL20;FOverlayContrast=VAL20;FColorContrast=VAL20;BColorContrast=VAL20;Gsmoothing=ADVSMOOTH";
+                string printingParams = "GRibbonType=RC_YMCKO;Duplex=HORIZONTAL;GDuplexType=DUPLEX_CC;FOverlayManagement=FULLVARNISH;BOverlayManagement=FULLVARNISH;FBlackManagement=ALLBLACKPOINT;BBlackManagement=ALLBLACKPOINT;BOverlayContrast=VAL20;FOverlayContrast=VAL20;FColorContrast=VAL10;BColorContrast=VAL20;Gsmoothing=ADVSMOOTH";
                 string frontFileData = string.Empty;
                 string backFileData = string.Empty;
                 bool endFlag = false;

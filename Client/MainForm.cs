@@ -21,6 +21,11 @@ namespace Client
             InitializeComponent();
         }
 
+        private void OnLoad(object sender, EventArgs e)
+        {
+
+        }
+
         private void checkInToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clear();
@@ -53,8 +58,21 @@ namespace Client
 
         private void Clear()
         {
-            checkIn.Close();
-            register.Close();
+            if (checkIn != null)
+            {
+                checkIn.Close();
+                checkIn.Dispose();
+                checkIn = null;
+            }
+
+            if (register != null)
+            {
+                register.Dispose();
+                register.Close();
+                register = null;
+            }
+
+            GC.Collect();
         }
     }
 }

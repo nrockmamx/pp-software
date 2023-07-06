@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain.Model;
 using Domain.Model.Request;
+using Emgu.CV.Face;
 using Emgu.CV.Reg;
 using RestSharp;
 using static Client.EVOSDK1Enums;
@@ -32,7 +33,7 @@ namespace Client.Member.Register
         {
             Printer p = new Printer();
             Data data = new Data("Evolis Primacy");
-            p.Print(data, "", "");
+            p.ChoosePrinter(ref data, "Resources/frontGoldNoNumber.BMP", "xxxxw.bmp");
 
         }
 
@@ -88,6 +89,7 @@ namespace Client.Member.Register
                     is_textBox.Text = card.issuer;
                     ed_textBox.Text = card.issue_expire;
                     var bitMap = GlobalFunc.Base64StringToBitmap(card.photo);
+                    MasterCache.PassportBitMap = card.photo;
                     Size size = new Size(213, 229);
                     personal_pictureBox.Image = GlobalFunc.resizeImage((Image)bitMap, size);
                 }
@@ -106,7 +108,7 @@ namespace Client.Member.Register
 
         private async void register_button_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tel_textBox.Text) || tel_textBox.Text.Length < 10)
+            if (string.IsNullOrEmpty(tel_textBox.Text) || tel_textBox.Text.Length < 10 || !GlobalFunc.IsDigitsOnly(tel_textBox.Text))
             {
                 MessageBox.Show("Please input phonenumber with number only", "Error");
                 return;
@@ -139,6 +141,7 @@ namespace Client.Member.Register
             memberCardRegisterRequest.Tel = tel_textBox.Text;
             memberCardRegisterRequest.From = from_comboBox.SelectedItem.ToString();
             memberCardRegisterRequest.CardIden.Ssid = ssid_textBox.Text;
+            memberCardRegisterRequest.CardIden.PersonalImage = MasterCache.PersonalBitMap;
 
             request.AddBody(memberCardRegisterRequest);
             var res = await client.ExecutePostAsync(request);
@@ -171,6 +174,47 @@ namespace Client.Member.Register
 
             MessageBox.Show("Register Success", "Success");
             printcard_button.Enabled = true;
+
+            var qrCode = GlobalFunc.CreateQRCode(resp.data.ToString());
+            Size s = new Size(349, 349);
+            var temp = GlobalFunc.resizeImage(qrCode, s);
+            var backCard = Image.FromFile("Resources/backSide.BMP");
+            var backCardx =  MergeImages(backCard,temp);
+            backCardx.Save("xxxxw.bmp");
+        }
+
+        private Image MergeImages(Image backgroundImage,
+                          Image overlayImage)
+        {
+            Image theResult = backgroundImage;
+            if (null != overlayImage)
+            {
+                Image theOverlay = overlayImage;
+                if (PixelFormat.Format32bppArgb != overlayImage.PixelFormat)
+                {
+                    theOverlay = new Bitmap(overlayImage.Width,
+                                            overlayImage.Height,
+                                            PixelFormat.Format32bppArgb);
+                    using (Graphics graphics = Graphics.FromImage(theOverlay))
+                    {
+                        graphics.DrawImage(overlayImage,
+                                           new Rectangle(0, 0, theOverlay.Width, theOverlay.Height),
+                                           new Rectangle(0, 0, overlayImage.Width, overlayImage.Height),
+                                           GraphicsUnit.Pixel);
+                    }
+                    ((Bitmap)theOverlay).MakeTransparent();
+                }
+
+                using (Graphics graphics = Graphics.FromImage(theResult))
+                {
+                    graphics.DrawImage(theOverlay,
+                                       new Rectangle(579, 130, theOverlay.Width, theOverlay.Height),
+                                       new Rectangle(0, 0, theOverlay.Width, theOverlay.Height),
+                                       GraphicsUnit.Pixel);
+                }
+            }
+
+            return theResult;
         }
     }
 }
