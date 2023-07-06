@@ -1,6 +1,7 @@
 using Domain.Command;
 using Domain.Handler;
 using Domain.Model;
+using Domain.MongoDB.Collections;
 using Domain.Repository;
 using Infrastruceture.Environments;
 using Infrastruceture.Repository;
@@ -56,6 +57,8 @@ public static class ExtensionService
         services.AddTransient<IRequestHandler<MemberCardRegisterCommand, ModelResponse>,MemberCardRegisterCommandHandler>();
         services.AddTransient<IRequestHandler<MemberCardPrintedCommand, ModelResponse>,MemberCardPrintedCommandHandler>();
         services.AddTransient<IRequestHandler<MemberCardFindCommand, ModelResponse>,MemberCardFindCommandHandler>();
+        services.AddTransient<IRequestHandler<MonthlyJackpotGetCommand, ModelResponse>,MonthlyJackpotGetCommandHandler>();
+        services.AddTransient<IRequestHandler<MonthlyJackpotUpdateCommand, ModelResponse>,MonthlyJackpotUpdateCommandHandler>();
     }
 
     internal static void AddRedis(this IServiceCollection services, IConfiguration configuration)

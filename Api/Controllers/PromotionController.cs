@@ -69,6 +69,45 @@ namespace Api.Controllers
             }
         }
         
+        [HttpGet("monthlyjackpot/get")]
+        public async Task<ActionResult<ModelResponse>> PromotionMonthlyJackpotGet(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var resp = await _mediator.Send(new MonthlyJackpotGetCommand()
+                {
+                });
+ 
+                return resp;
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error("{Message}",e.ToString());
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("monthlyjackpot/update/{total}")]
+        public async Task<ActionResult<ModelResponse>> PromotionMonthlyJackpotUpdate(long total,CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var resp = await _mediator.Send(new MonthlyJackpotUpdateCommand()
+                {
+                    Total = total
+                });
+ 
+                return resp;
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error("{Message}",e.ToString());
+                return BadRequest();
+            }
+        }
+        
         [HttpGet("borderpass/history/{ssid}/{page}")]
         [AuthTokenRequired]
         public async Task<ActionResult<ModelResponse>> PromotionCheckInHistory(string ssid,int page = 1,CancellationToken cancellationToken = default)

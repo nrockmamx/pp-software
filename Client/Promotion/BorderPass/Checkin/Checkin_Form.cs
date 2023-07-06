@@ -16,6 +16,7 @@ using RestSharp;
 using Domain.Model;
 using System.Security.Policy;
 using Emgu.Util;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Client.Promotion.BorderPass.CheckingVoucher
 {
@@ -23,6 +24,7 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
     {
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfoCollection;
+        private bool run = true;
 
         public Checkin_Form()
         {
@@ -30,17 +32,54 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
 
         }
 
+        public void Dispose()
+        {
+            if (videoCapture != null)
+            {
+
+                videoCapture.SignalToStop();
+                videoCapture.WaitForStop();
+            }
+
+            PassportScanner.Stop = true;
+        }
+
+        private async void ReadPassport()
+        {
+            while (run)
+            {
+                if (PassportScanner.passportInfo != null && !PassportScanner.passportInfo.Used)
+                {
+
+                    ThreadHelperClass.SetText(this, nameEng_textBox, $"{PassportScanner.passportInfo.Givenname} {PassportScanner.passportInfo.Familyname}");
+                    ThreadHelperClass.SetText(this, passport_id_textBox, PassportScanner.passportInfo.DocumentNo);
+                    ThreadHelperClass.SetText(this, dob_textBox, PassportScanner.passportInfo.DocumentNo);
+                    ThreadHelperClass.SetText(this, ed_textBox, PassportScanner.passportInfo.Dateofexpiry);
+                    ThreadHelperClass.SetText(this, ssid_textBox, PassportScanner.passportInfo.PersonalNo);
+                    ThreadHelperClass.SetText(this, mrtds_textBox, PassportScanner.passportInfo.Mrtds);
+                    ThreadHelperClass.Enable(this, checkin_button, true);
+                    Size size = new Size(488, 225);
+                    var pic = resizeImage(Bitmap.FromFile("PassportImage/temp.jpg"), size);
+
+                    checkin_button.Enabled = true;
+                    passport_pictureBox.Image = pic;
+                    PassportScanner.passportInfo.Used = true;
+                }
+
+                await Task.Delay(1000);
+            }
+        }
         private void captureVideo(object sender, NewFrameEventArgs e)
         {
-            Size size = new Size(382, 335);
+            Size size = new Size(488, 225);
             var video = resizeImage((Bitmap)e.Frame.Clone(), size);
             border_pass_pictureBox.Image = video;
-
+            GC.Collect();
         }
 
         private async void get_voucher_button_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
@@ -68,6 +107,7 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
             Graphics g = Graphics.FromImage((System.Drawing.Image)b);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             // Draw image with new width and height  
+
             g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
             g.Dispose();
             return (System.Drawing.Image)b;
@@ -78,64 +118,22 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
             filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             videoCapture = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
             videoCapture.NewFrame += new NewFrameEventHandler(captureVideo);
-            //videoCapture.DesiredFrameRate = 15;
+            videoCapture.DesiredFrameRate = 60;
             videoCapture.Start();
+
+            Task.Run(() =>
+            {
+                PassportScanner.Start();
+            });
+
+            Thread thread1 = new Thread(ReadPassport);
+            thread1.Start();
+            run = true;
         }
 
-        private async void readcard_button_Click(object sender, EventArgs e)
+        private void checkin_button_Click(object sender, EventArgs e)
         {
-            try
-            {
 
-                var client = new RestClient("http://localhost:21998");
-                var request = new RestRequest($"info");
-
-                var res = await client.ExecuteGetAsync(request);
-
-                if (!res.IsSuccessful)
-                {
-                    MessageBox.Show("Can't find Driver Card Iden Reader", "Error");
-                    return;
-                }
-
-
-                request = new RestRequest($"readCard");
-
-                res = await client.ExecuteGetAsync(request);
-
-                if (!res.IsSuccessful)
-                {
-                    MessageBox.Show("Please input card to reader", "Error");
-                    return;
-                }
-
-                var card = Newtonsoft.Json.JsonConvert.DeserializeObject<CardReader>(res.Content.ToString());
-
-                if (card != null)
-                {
-                    addressTh_textBox.Text = $"{card.address_no} {card.address_moo} {card.address_road} {card.address_soi} {card.address_trok} {card.address_tumbol} {card.address_amphor} {card.address_provinice}";
-                    dob_textBox.Text = card.birthdate;
-                    nameEng_textBox.Text = $"{card.fname_en} {card.sname_en}";
-                    nameTh_textBox.Text = $"{card.fname_th} {card.sname_th}";
-                    ssid_textBox.Text = card.nat_id;
-                    is_textBox.Text = card.issuer;
-                    ed_textBox.Text = card.issue_expire;
-                    var bitMap = GlobalFunc.Base64StringToBitmap(card.photo);
-
-                    Size size = new Size(275, 230);
-                    personal_pictureBox.Image = resizeImage((Image)bitMap, size);
-                    checkin_button.Enabled = true;
-                }
-                else
-                {
-                    MessageBox.Show("Can't read card", "Error");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Please check card", "Error");
-            }
         }
     }
 }
