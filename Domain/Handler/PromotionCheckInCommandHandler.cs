@@ -51,6 +51,7 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
             promotionCheckIn.PassportInfo = request.PromotionCheckInRequest.PassportInfo;
             promotionCheckIn.PersonalNo = request.PromotionCheckInRequest.PassportInfo.PersonalNo;
             promotionCheckIn.CheckInTime = DateTime.Now;
+            promotionCheckIn.PhoneNumber = request.PromotionCheckInRequest.PhoneNumber;
             promotionCheckIn.Amount = request.PromotionCheckInRequest.Amount;
             promotionCheckIn.PassportImage = request.PromotionCheckInRequest.PassportImage;
             promotionCheckIn.CameraImage = request.PromotionCheckInRequest.CameraImage;

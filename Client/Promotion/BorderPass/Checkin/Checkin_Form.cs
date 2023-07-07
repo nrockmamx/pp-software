@@ -17,6 +17,7 @@ using Domain.Model;
 using System.Security.Policy;
 using Emgu.Util;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Domain.Model.Request;
 
 namespace Client.Promotion.BorderPass.CheckingVoucher
 {
@@ -61,9 +62,24 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
                     Size size = new Size(488, 225);
                     var pic = resizeImage(Bitmap.FromFile("PassportImage/temp.jpg"), size);
 
-                    checkin_button.Enabled = true;
                     passport_pictureBox.Image = pic;
                     PassportScanner.passportInfo.Used = true;
+
+                    var client = new RestClient(MasterCache.ApiUrl);
+                    var request = new RestRequest($"v1/promotion/borderpass/check/{ssid_textBox.Text}");
+                    request.AddHeader("Authorization", MasterCache.Token);
+
+                    var res = await client.ExecuteGetAsync(request);
+
+                    if (res.StatusCode != System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("Invalid Username or Password");
+                        await Task.Delay(1000);
+                        checkin_button.Enabled = false;
+                        continue;
+                    }
+                    checkin_button.Enabled = true;
+
                 }
 
                 await Task.Delay(1000);
@@ -73,13 +89,8 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
         {
             Size size = new Size(488, 225);
             var video = resizeImage((Bitmap)e.Frame.Clone(), size);
-            border_pass_pictureBox.Image = video;
+            camera_pictureBox.Image = video;
             GC.Collect();
-        }
-
-        private async void get_voucher_button_Click(object sender, EventArgs e)
-        {
-
         }
 
         private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
@@ -131,9 +142,58 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
             run = true;
         }
 
-        private void checkin_button_Click(object sender, EventArgs e)
+        private async void checkin_button_Click(object sender, EventArgs e)
         {
 
+            PromotionCheckInRequest promotionCheckInRequest = new PromotionCheckInRequest();
+            promotionCheckInRequest.PassportInfo = new Domain.Model.PassportInfo();
+            promotionCheckInRequest.PassportInfo.Angle = PassportScanner.passportInfo.Angle;
+            promotionCheckInRequest.PassportInfo.Familyname = PassportScanner.passportInfo.Familyname;
+            promotionCheckInRequest.PassportInfo.Birthday = PassportScanner.passportInfo.Birthday;
+            promotionCheckInRequest.PassportInfo.Dateofexpiry = PassportScanner.passportInfo.Dateofexpiry;
+            promotionCheckInRequest.PassportInfo.Angle = PassportScanner.passportInfo.Angle;
+            promotionCheckInRequest.PassportInfo.Birthday = PassportScanner.passportInfo.Birthday;
+            promotionCheckInRequest.PassportInfo.DocumentNo = PassportScanner.passportInfo.DocumentNo;
+            promotionCheckInRequest.PassportInfo.Givenname = PassportScanner.passportInfo.Givenname;
+            promotionCheckInRequest.PassportInfo.IssueState = PassportScanner.passportInfo.IssueState;
+            promotionCheckInRequest.PassportInfo.Sex = PassportScanner.passportInfo.Sex;
+            promotionCheckInRequest.PassportInfo.PersonalNo = PassportScanner.passportInfo.PersonalNo;
+            promotionCheckInRequest.PassportInfo.Mrtds = PassportScanner.passportInfo.Mrtds;
+            promotionCheckInRequest.PassportInfo.Nationality = PassportScanner.passportInfo.Nationality;
+            promotionCheckInRequest.PassportInfo.NativeName = PassportScanner.passportInfo.NativeName;
+            promotionCheckInRequest.PassportInfo.Type = PassportScanner.passportInfo.Type;
+            promotionCheckInRequest.PhoneNumber = phone_textBox.Text;
+            promotionCheckInRequest.Amount = Convert.ToDecimal(money_textBox.Text);
+
+            using (var ms = new MemoryStream())
+            {
+                using (var bitmap = new Bitmap(camera_pictureBox.Image))
+                {
+                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    promotionCheckInRequest.CameraImage = Convert.ToBase64String(ms.GetBuffer());
+                }
+            }
+
+            using (var ms = new MemoryStream())
+            {
+                using (var bitmap = new Bitmap(passport_pictureBox.Image))
+                {
+                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    promotionCheckInRequest.PassportImage = Convert.ToBase64String(ms.GetBuffer());
+                }
+            }
+
+
+            var client = new RestClient(MasterCache.ApiUrl);
+            var request = new RestRequest($"v1/promotion/borderpass/checkin");
+            request.AddHeader("Authorization", MasterCache.Token);
+            request.AddBody(promotionCheckInRequest);
+            var res = await client.ExecutePostAsync(request);
+
+            if (res.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+
+            }
         }
     }
 }
