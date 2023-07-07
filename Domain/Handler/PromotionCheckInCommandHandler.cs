@@ -38,7 +38,7 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
 
             var checkPro = _repositoryPromotionCheckIn.GetCollection()
                 .WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
-                .Where(x => x.PassportInfo.PersonalNo == request.PromotionCheckInRequest.PassportInfo.PersonalNo && x.Dt==DateTime.Now.Date.ToString("dd-MM-yyyy")).FirstOrDefault();
+                .Where(x => x.PersonalNo== request.PromotionCheckInRequest.PassportInfo.PersonalNo && x.Dt==DateTime.Now.Date.ToString("dd-MM-yyyy")).FirstOrDefault();
 
             if (checkPro != null)
             {
@@ -47,6 +47,8 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
             }
                 
             PromotionCheckIn promotionCheckIn = new PromotionCheckIn();
+            promotionCheckIn.PassportInfo = new PassportInfo();
+            promotionCheckIn.PassportInfo = request.PromotionCheckInRequest.PassportInfo;
             promotionCheckIn.PersonalNo = request.PromotionCheckInRequest.PassportInfo.PersonalNo;
             promotionCheckIn.CheckInTime = DateTime.Now;
             promotionCheckIn.Amount = request.PromotionCheckInRequest.Amount;
