@@ -31,7 +31,7 @@
             groupBox1 = new GroupBox();
             checkin_button = new Button();
             groupBox5 = new GroupBox();
-            dataGridView1 = new DataGridView();
+            history_dataGridView = new DataGridView();
             groupBox2 = new GroupBox();
             money_textBox = new TextBox();
             label4 = new Label();
@@ -55,7 +55,7 @@
             label8 = new Label();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)history_dataGridView).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)camera_pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passport_pictureBox).BeginInit();
@@ -87,7 +87,7 @@
             // 
             // groupBox5
             // 
-            groupBox5.Controls.Add(dataGridView1);
+            groupBox5.Controls.Add(history_dataGridView);
             groupBox5.Location = new Point(17, 572);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(1029, 440);
@@ -95,15 +95,16 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "History";
             // 
-            // dataGridView1
+            // history_dataGridView
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 34);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(981, 379);
-            dataGridView1.TabIndex = 0;
+            history_dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            history_dataGridView.Location = new Point(29, 34);
+            history_dataGridView.Name = "history_dataGridView";
+            history_dataGridView.ReadOnly = true;
+            history_dataGridView.RowHeadersWidth = 62;
+            history_dataGridView.RowTemplate.Height = 33;
+            history_dataGridView.Size = new Size(981, 379);
+            history_dataGridView.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -321,7 +322,7 @@
             Load += LoadFrom;
             groupBox1.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)history_dataGridView).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)camera_pictureBox).EndInit();
@@ -347,7 +348,7 @@
         private TextBox dob_textBox;
         private Label label8;
         private GroupBox groupBox5;
-        private DataGridView dataGridView1;
+        private DataGridView history_dataGridView;
         private PictureBox camera_pictureBox;
         private Button checkin_button;
         private TextBox mrtds_textBox;

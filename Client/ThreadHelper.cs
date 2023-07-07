@@ -10,6 +10,7 @@ namespace Client
     {
         delegate void SetTextCallback(Form f, Control ctrl, string text);
         delegate void SetEnableCallback(Form f, Control ctrl, bool enable);
+        delegate void SetDataGridCallBack(Form f, DataGridView ctrl, params object[] value);
         /// <summary>
         /// Set text property of various controls
         /// </summary>
@@ -31,7 +32,21 @@ namespace Client
                 ctrl.Text = text;
             }
         }
-
+        public static void AddDataGrid(Form form, DataGridView ctrl, params object[] value)
+        {
+            // InvokeRequired required compares the thread ID of the 
+            // calling thread to the thread ID of the creating thread. 
+            // If these threads are different, it returns true. 
+            if (ctrl.InvokeRequired)
+            {
+                SetDataGridCallBack d = new SetDataGridCallBack(AddDataGrid);
+                form.Invoke(d, new object[] { form, ctrl, value });
+            }
+            else
+            {
+                ctrl.Rows.Add(value);
+            }
+        }
         public static void Enable(Form form, Control ctrl, bool enable)
         {
             // InvokeRequired required compares the thread ID of the 
