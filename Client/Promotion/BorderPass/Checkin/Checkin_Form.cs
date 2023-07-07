@@ -73,12 +73,24 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
 
                     if (res.StatusCode != System.Net.HttpStatusCode.OK)
                     {
-                        MessageBox.Show("Invalid Username or Password");
+                        ThreadHelperClass.SetText(this, status_label, "Server Error");
                         await Task.Delay(1000);
-                        checkin_button.Enabled = false;
+                        ThreadHelperClass.Enable(this, checkin_button, false);
                         continue;
                     }
-                    checkin_button.Enabled = true;
+
+                    ModelResponse resp = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelResponse>(res.Content.ToString());
+
+                    if (!resp.GetStatus())
+                    {
+                        ThreadHelperClass.SetText(this, status_label, "already");
+                        await Task.Delay(1000);
+                        ThreadHelperClass.Enable(this, checkin_button, false);
+                        continue;
+                    }
+
+                    ThreadHelperClass.SetText(this, status_label, "Yess!!");
+                    ThreadHelperClass.Enable(this, checkin_button, true);
 
                 }
 
@@ -192,8 +204,24 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
 
             if (res.StatusCode != System.Net.HttpStatusCode.OK)
             {
+                status_label.Text = "Server Error";
+                checkin_button.Enabled = false;
 
+                return;
             }
+
+
+            ModelResponse resp = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelResponse>(res.Content.ToString());
+
+            if (resp.GetStatus())
+            {
+                status_label.Text = "Done";
+                checkin_button.Enabled = false;
+                return;
+            }
+
+            status_label.Text = "Server Error";
+            checkin_button.Enabled = false;
         }
     }
 }
