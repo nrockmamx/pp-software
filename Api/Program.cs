@@ -37,14 +37,13 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowAlls",
         builder =>
         {
             builder
-                .AllowAnyOrigin() 
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+                .AllowAnyHeader();
         });
 });
 
@@ -73,12 +72,6 @@ ServicePointManager.DefaultConnectionLimit = Int32.MaxValue;
 
 var app = builder.Build();
 
-app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
-    .AddDefaultSecurePolicy()
-    .AddCustomHeader("Access-Control-Allow-Origin", "http://localhost:3000")
-    .AddCustomHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE")
-    .AddCustomHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization"));
-
 app.UseResponseCompression();
 
 app.MapControllers();
@@ -86,7 +79,7 @@ app.UseSerilogRequestLogging();
 
 app.UseMyMiddleware();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowAlls");
 
 app.MapHealthChecks("/health", new HealthCheckOptions { ResponseWriter = WriteResponse });
 
