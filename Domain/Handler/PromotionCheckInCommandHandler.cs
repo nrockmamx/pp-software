@@ -34,47 +34,27 @@ public class PromotionCheckInCommandHandler : IRequestHandler<PromotionCheckInCo
         ModelResponse modelResponse = new ModelResponse();
         try
         {
-            var check = _repositoryIdenCard.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred)
-                .AsQueryable()
-                .Where(x => x.Ssid == request.PromotionCheckInRequest.Ssid).FirstOrDefault();
 
-            if (check == null)
+
+            var checkPro = _repositoryPromotionCheckIn.GetCollection()
+                .WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
+                .Where(x => x.PassportInfo.PersonalNo == request.PromotionCheckInRequest.PassportInfo.PersonalNo && x.Dt==DateTime.Now.Date.ToString("dd-MM-yyyy")).FirstOrDefault();
+
+            if (checkPro != null)
             {
-                check = new IdenCard();
-                check.Ssid = request.PromotionCheckInRequest.Ssid;
-                check.Tel = request.PromotionCheckInRequest.Tel;
-                check.NameTh = request.PromotionCheckInRequest.NameTh;
-                check.NameEng = request.PromotionCheckInRequest.NameEng;
-                check.Address = request.PromotionCheckInRequest.AddressEng;
-                check.PassportImage = request.PromotionCheckInRequest.PassportImage;
-                check.PersonalImage = request.PromotionCheckInRequest.PersonalImage;
-                check.DateOfBirth = request.PromotionCheckInRequest.DateOfBirth;
-                await _repositoryIdenCard.InsertOneAsync(check);
-                check = _repositoryIdenCard.GetCollection().AsQueryable().Where(x => x.Ssid == request.PromotionCheckInRequest.Ssid).FirstOrDefault();
+                modelResponse.data = "ALREADY";
+                return modelResponse;
             }
-
-            if (check != null)
-            {
-                var checkPro = _repositoryPromotionCheckIn.GetCollection()
-                    .WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
-                    .Where(x => x.IdenCard.Ssid == check.Ssid && x.Dt==DateTime.Now.Date.ToString("dd-MM-yyyy")).FirstOrDefault();
-
-                if (checkPro != null)
-                {
-                    modelResponse.data = "ALREADY";
-                    return modelResponse;
-                }
                 
-                PromotionCheckIn promotionCheckIn = new PromotionCheckIn();
-                promotionCheckIn.IdenCard = check;
-                promotionCheckIn.CheckInTime = DateTime.Now;
-                promotionCheckIn.Amount = request.PromotionCheckInRequest.Amount;
-                promotionCheckIn.PassportImage = request.PromotionCheckInRequest.PassportImage;
-                promotionCheckIn.Dt = DateTime.Now.Date.ToString("dd-MM-yyyy");
-                await _repositoryPromotionCheckIn.InsertOneAsync(promotionCheckIn);
-                modelResponse.Success();
-            }
-
+            PromotionCheckIn promotionCheckIn = new PromotionCheckIn();
+            promotionCheckIn.PersonalNo = request.PromotionCheckInRequest.PassportInfo.PersonalNo;
+            promotionCheckIn.CheckInTime = DateTime.Now;
+            promotionCheckIn.Amount = request.PromotionCheckInRequest.Amount;
+            promotionCheckIn.PassportImage = request.PromotionCheckInRequest.PassportImage;
+            promotionCheckIn.CameraImage = request.PromotionCheckInRequest.CameraImage;
+            promotionCheckIn.Dt = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            await _repositoryPromotionCheckIn.InsertOneAsync(promotionCheckIn);
+            modelResponse.Success();
         }
         catch (Exception e)
         {

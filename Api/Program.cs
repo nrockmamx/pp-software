@@ -35,6 +35,20 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.Converters.Add(new StringEnumConverter());
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin() 
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+});
+
+
 builder.Services.AddTransient<ServiceFactory>(p => p.GetService);
 builder.Services.AddSingleton<IEnvironmentsConfig, EnvironmentsConfig>();
 builder.Services.AddMemoryCache();
