@@ -33,6 +33,8 @@
             groupBox5 = new GroupBox();
             dataGridView1 = new DataGridView();
             groupBox2 = new GroupBox();
+            money_textBox = new TextBox();
+            label4 = new Label();
             phone_textBox = new TextBox();
             label3 = new Label();
             label2 = new Label();
@@ -43,7 +45,7 @@
             label5 = new Label();
             nameEng_textBox = new TextBox();
             label6 = new Label();
-            border_pass_pictureBox = new PictureBox();
+            camera_pictureBox = new PictureBox();
             passport_pictureBox = new PictureBox();
             ed_textBox = new TextBox();
             label11 = new Label();
@@ -51,13 +53,11 @@
             label10 = new Label();
             dob_textBox = new TextBox();
             label8 = new Label();
-            money_textBox = new TextBox();
-            label4 = new Label();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)camera_pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passport_pictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -119,7 +119,7 @@
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(nameEng_textBox);
             groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(border_pass_pictureBox);
+            groupBox2.Controls.Add(camera_pictureBox);
             groupBox2.Controls.Add(passport_pictureBox);
             groupBox2.Controls.Add(ed_textBox);
             groupBox2.Controls.Add(label11);
@@ -133,6 +133,23 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Detail";
+            // 
+            // money_textBox
+            // 
+            money_textBox.Location = new Point(125, 374);
+            money_textBox.Name = "money_textBox";
+            money_textBox.Size = new Size(140, 31);
+            money_textBox.TabIndex = 27;
+            money_textBox.Text = "200";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(48, 377);
+            label4.Name = "label4";
+            label4.Size = new Size(71, 25);
+            label4.TabIndex = 28;
+            label4.Text = "Money:";
             // 
             // phone_textBox
             // 
@@ -224,14 +241,14 @@
             label6.TabIndex = 0;
             label6.Text = "Name:";
             // 
-            // border_pass_pictureBox
+            // camera_pictureBox
             // 
-            border_pass_pictureBox.BorderStyle = BorderStyle.Fixed3D;
-            border_pass_pictureBox.Location = new Point(483, 33);
-            border_pass_pictureBox.Name = "border_pass_pictureBox";
-            border_pass_pictureBox.Size = new Size(426, 225);
-            border_pass_pictureBox.TabIndex = 19;
-            border_pass_pictureBox.TabStop = false;
+            camera_pictureBox.BorderStyle = BorderStyle.Fixed3D;
+            camera_pictureBox.Location = new Point(483, 33);
+            camera_pictureBox.Name = "camera_pictureBox";
+            camera_pictureBox.Size = new Size(426, 225);
+            camera_pictureBox.TabIndex = 19;
+            camera_pictureBox.TabStop = false;
             // 
             // passport_pictureBox
             // 
@@ -293,23 +310,6 @@
             label8.TabIndex = 9;
             label8.Text = "Date of birth:";
             // 
-            // money_textBox
-            // 
-            money_textBox.Location = new Point(125, 374);
-            money_textBox.Name = "money_textBox";
-            money_textBox.Size = new Size(140, 31);
-            money_textBox.TabIndex = 27;
-            money_textBox.Text = "200";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(48, 377);
-            label4.Name = "label4";
-            label4.Size = new Size(71, 25);
-            label4.TabIndex = 28;
-            label4.Text = "Money:";
-            // 
             // Checkin_Form
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -324,7 +324,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)border_pass_pictureBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)camera_pictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)passport_pictureBox).EndInit();
             ResumeLayout(false);
         }
@@ -348,7 +348,7 @@
         private Label label8;
         private GroupBox groupBox5;
         private DataGridView dataGridView1;
-        private PictureBox border_pass_pictureBox;
+        private PictureBox camera_pictureBox;
         private Button checkin_button;
         private TextBox mrtds_textBox;
         private Label label1;
