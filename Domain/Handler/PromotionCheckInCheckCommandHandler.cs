@@ -33,7 +33,7 @@ public class PromotionCheckInCheckCommandHandler : IRequestHandler<PromotionChec
         try
         {
             var check = _repository.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
-                .Where(x => x.IdenCard.Ssid == request.Ssid && x.Dt == DateTime.Now.ToString("dd-MM-yyyy")).FirstOrDefault();
+                .Where(x => x.PersonalNo == request.Ssid && x.Dt == DateTime.Now.ToString("dd-MM-yyyy")).FirstOrDefault();
 
             if (check == null)
             {

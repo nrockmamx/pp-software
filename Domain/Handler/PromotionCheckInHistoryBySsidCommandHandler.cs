@@ -39,7 +39,7 @@ public class PromotionCheckInHistoryBySsidCommandHandler : IRequestHandler<Promo
                 skip = request.Page * 50;
 
             var check = _repository.GetCollection().WithReadPreference(ReadPreference.SecondaryPreferred).AsQueryable()
-                .Where(x => x.IdenCard.Ssid == request.Ssid).OrderByDescending(x => x.CreatedAt).Skip(skip).Take(50)
+                .Where(x => x.PersonalNo== request.Ssid).OrderByDescending(x => x.CreatedAt).Skip(skip).Take(50)
                 .ToList();
 
             modelResponse.data = check;
