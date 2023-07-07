@@ -49,6 +49,7 @@ builder.Services.AddCors(options =>
 });
 
 
+
 builder.Services.AddTransient<ServiceFactory>(p => p.GetService);
 builder.Services.AddSingleton<IEnvironmentsConfig, EnvironmentsConfig>();
 builder.Services.AddMemoryCache();
@@ -71,6 +72,12 @@ builder.Services.AddResponseCompression(options =>
 ServicePointManager.DefaultConnectionLimit = Int32.MaxValue;
 
 var app = builder.Build();
+
+app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+    .AddDefaultSecurePolicy()
+    .AddCustomHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    .AddCustomHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE")
+    .AddCustomHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization"));
 
 app.UseResponseCompression();
 
