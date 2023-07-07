@@ -53,7 +53,7 @@ namespace Client.Promotion.BorderPass.CheckingVoucher
 
                     ThreadHelperClass.SetText(this, nameEng_textBox, $"{PassportScanner.passportInfo.Givenname} {PassportScanner.passportInfo.Familyname}");
                     ThreadHelperClass.SetText(this, passport_id_textBox, PassportScanner.passportInfo.DocumentNo);
-                    ThreadHelperClass.SetText(this, dob_textBox, PassportScanner.passportInfo.DocumentNo);
+                    ThreadHelperClass.SetText(this, dob_textBox, PassportScanner.passportInfo.Birthday);
                     ThreadHelperClass.SetText(this, ed_textBox, PassportScanner.passportInfo.Dateofexpiry);
                     ThreadHelperClass.SetText(this, ssid_textBox, PassportScanner.passportInfo.PersonalNo);
                     ThreadHelperClass.SetText(this, mrtds_textBox, PassportScanner.passportInfo.Mrtds);

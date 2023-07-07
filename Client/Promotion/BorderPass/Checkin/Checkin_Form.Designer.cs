@@ -33,6 +33,10 @@
             groupBox5 = new GroupBox();
             dataGridView1 = new DataGridView();
             groupBox2 = new GroupBox();
+            phone_textBox = new TextBox();
+            label3 = new Label();
+            label2 = new Label();
+            status_label = new Label();
             mrtds_textBox = new TextBox();
             label1 = new Label();
             passport_id_textBox = new TextBox();
@@ -47,8 +51,8 @@
             label10 = new Label();
             dob_textBox = new TextBox();
             label8 = new Label();
-            status_label = new Label();
-            label2 = new Label();
+            money_textBox = new TextBox();
+            label4 = new Label();
             groupBox1.SuspendLayout();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -64,7 +68,7 @@
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Location = new Point(29, 19);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1485, 989);
+            groupBox1.Size = new Size(1485, 1032);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Passport CheckIn ";
@@ -75,7 +79,7 @@
             checkin_button.Font = new Font("Segoe UI", 26F, FontStyle.Bold, GraphicsUnit.Point);
             checkin_button.Location = new Point(1052, 585);
             checkin_button.Name = "checkin_button";
-            checkin_button.Size = new Size(382, 387);
+            checkin_button.Size = new Size(382, 427);
             checkin_button.TabIndex = 3;
             checkin_button.Text = "Check In";
             checkin_button.UseVisualStyleBackColor = true;
@@ -86,7 +90,7 @@
             groupBox5.Controls.Add(dataGridView1);
             groupBox5.Location = new Point(17, 572);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(1029, 400);
+            groupBox5.Size = new Size(1029, 440);
             groupBox5.TabIndex = 2;
             groupBox5.TabStop = false;
             groupBox5.Text = "History";
@@ -98,11 +102,15 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(981, 289);
+            dataGridView1.Size = new Size(981, 379);
             dataGridView1.TabIndex = 0;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(money_textBox);
+            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(phone_textBox);
+            groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(status_label);
             groupBox2.Controls.Add(mrtds_textBox);
@@ -126,13 +134,51 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal Detail";
             // 
+            // phone_textBox
+            // 
+            phone_textBox.Location = new Point(125, 337);
+            phone_textBox.Name = "phone_textBox";
+            phone_textBox.Size = new Size(339, 31);
+            phone_textBox.TabIndex = 25;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(24, 340);
+            label3.Name = "label3";
+            label3.Size = new Size(95, 25);
+            label3.TabIndex = 26;
+            label3.Text = "Phone No:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(483, 341);
+            label2.Name = "label2";
+            label2.Size = new Size(249, 96);
+            label2.TabIndex = 24;
+            label2.Text = "Status:";
+            label2.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // status_label
+            // 
+            status_label.AutoSize = true;
+            status_label.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            status_label.Location = new Point(717, 341);
+            status_label.Name = "status_label";
+            status_label.Size = new Size(670, 96);
+            status_label.TabIndex = 23;
+            status_label.Text = "Wait Insert Passport";
+            status_label.TextAlign = ContentAlignment.TopCenter;
+            // 
             // mrtds_textBox
             // 
             mrtds_textBox.Location = new Point(125, 215);
             mrtds_textBox.Multiline = true;
             mrtds_textBox.Name = "mrtds_textBox";
             mrtds_textBox.ReadOnly = true;
-            mrtds_textBox.Size = new Size(339, 261);
+            mrtds_textBox.Size = new Size(339, 116);
             mrtds_textBox.TabIndex = 22;
             // 
             // label1
@@ -247,27 +293,22 @@
             label8.TabIndex = 9;
             label8.Text = "Date of birth:";
             // 
-            // status_label
+            // money_textBox
             // 
-            status_label.AutoSize = true;
-            status_label.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            status_label.Location = new Point(717, 341);
-            status_label.Name = "status_label";
-            status_label.Size = new Size(670, 96);
-            status_label.TabIndex = 23;
-            status_label.Text = "Wait Insert Passport";
-            status_label.TextAlign = ContentAlignment.TopCenter;
+            money_textBox.Location = new Point(125, 374);
+            money_textBox.Name = "money_textBox";
+            money_textBox.Size = new Size(140, 31);
+            money_textBox.TabIndex = 27;
+            money_textBox.Text = "200";
             // 
-            // label2
+            // label4
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(483, 341);
-            label2.Name = "label2";
-            label2.Size = new Size(249, 96);
-            label2.TabIndex = 24;
-            label2.Text = "Status:";
-            label2.TextAlign = ContentAlignment.TopCenter;
+            label4.AutoSize = true;
+            label4.Location = new Point(48, 377);
+            label4.Name = "label4";
+            label4.Size = new Size(71, 25);
+            label4.TabIndex = 28;
+            label4.Text = "Money:";
             // 
             // Checkin_Form
             // 
@@ -313,5 +354,9 @@
         private Label label1;
         private Label status_label;
         private Label label2;
+        private TextBox phone_textBox;
+        private Label label3;
+        private TextBox money_textBox;
+        private Label label4;
     }
 }
