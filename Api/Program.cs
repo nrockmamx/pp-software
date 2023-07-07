@@ -79,6 +79,8 @@ app.UseSerilogRequestLogging();
 
 app.UseMyMiddleware();
 
+app.UseCors("AllowAll");
+
 app.MapHealthChecks("/health", new HealthCheckOptions { ResponseWriter = WriteResponse });
 
 await app.RunAsync("http://*:8080");
