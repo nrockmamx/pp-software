@@ -37,7 +37,6 @@ public class MonthlyJackpotUpdateCommandHandler : IRequestHandler<MonthlyJackpot
 
             if (check != null)
             {
-                check = new MonthlyJackpot();
                 check.Total = request.Total;
                 check.Number1 = check.Total * 30 / 100;
                 check.Number2 = check.Total * 20 / 100;
